@@ -5,7 +5,9 @@
 
 @foreach($doctors as $index => $doctor)
 	{{$doctor->first_name}}
-	{!! link_to(route('convs.create',$doctor->id),'contacter') !!}
+	@if(Sentinel::inRole('expert'))
+		{!! link_to(route('convs.create',$doctor->id),'contacter') !!}
+	@endif
 	<br>
 @endforeach
 

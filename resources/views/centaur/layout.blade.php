@@ -43,6 +43,7 @@
                              @if(Sentinel::inRole('user'))
                              <li><a href="{{ route('convs.create') }}">Poser une question</a></li>
                              <li><a href="{{ route('forms.list') }}">Formulaires</a></li>
+                             <li><a href="{{ route('users.doctor.list') }}">Practiciens</a></li>
                              @elseif(Sentinel::inRole('expert'))
                              <li><a href="{{ route('forms.index') }}">Demandes avec un practicien</a></li>
                              <li><a href="{{ route('users.doctor.list') }}">Contacter un practicien</a></li>
