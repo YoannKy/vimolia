@@ -44,16 +44,25 @@ class RegistrationController extends Controller
      */
     protected function postRegister(Request $request)
     {
-        // Validate the form data
         $result = $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'date_of_birth' => 'required',
+            'phone_number' => 'required',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|confirmed|min:6'
         ]);
 
         // Assemble registration credentials
         $credentials = [
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'address' => $request->get('address'),
+            'date_of_birth' => $request->get('date_of_birth'),
+            'phone_number' => $request->get('phone_number'),
             'email' => trim($request->get('email')),
-            'password' => $request->get('password'),
+            'password' => $request->get('password')
         ];
 
         // Attempt the registration
