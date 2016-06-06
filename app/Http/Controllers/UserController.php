@@ -19,6 +19,17 @@ class UserController extends Controller
     /** @var Centaur\AuthManager */
     protected $authManager;
 
+    protected $fillable = [
+        'email',
+        'password',
+        'last_name',
+        'first_name',
+        'permissions',
+        'address',
+        'date_of_birth',
+        'phone_number',
+    ];
+
     public function __construct(AuthManager $authManager)
     {
         // Middleware
