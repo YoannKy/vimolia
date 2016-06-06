@@ -96,20 +96,29 @@ class ConvController extends Controller
      * @param  None
      * @return View
      */
-    public function create()
+    public function create($id = null)
     {
-        $inactiveConvs = Conv::whereDoesntHave('messages')->get();
+        if ($id != null && (Sentinel::inRole('expert') || Sentinel::inRole('practicien'))) {
+            $conv = TBMsg::createConversation(
+                array(
+                    Sentinel::getUser()->id,
+                    $id
+                )
+            );
+        } else {
+            $inactiveConvs = Conv::whereDoesntHave('messages')->get();
 
-        foreach ($inactiveConvs as $index => $inactiveConv) {
-            $inactiveConv->delete();
+            foreach ($inactiveConvs as $index => $inactiveConv) {
+                $inactiveConv->delete();
+            }
+
+            $experts = User::listExpertsFromLastWeek()->toArray();
+            $experts = array_map([$this,"getUserId"], $experts);
+            array_unshift($experts, Sentinel::getUser()->id);
+            $conv = TBMsg::createConversation(
+                $experts
+            );
         }
-
-        $experts = User::listExpertsFromLastWeek()->toArray();
-        $experts = array_map([$this,"getUserId"], $experts);
-        array_unshift($experts, Sentinel::getUser()->id);
-        $conv = TBMsg::createConversation(
-            $experts
-        );
         // return $conv;
         return redirect(route('convs.show', ['id' => $conv['convId']]));
     }

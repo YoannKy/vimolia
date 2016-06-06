@@ -1,6 +1,28 @@
 @extends('Centaur::layout')
 @section('title', 'Messages')
 @section('content')
+@if(Sentinel::inRole('expert') || (Sentinel::inRole('practicien')))
+    {{ Form::open(array('route' => ['convs.addMessage',$conv->id])) }}
+        {{Form::text('message',null,array('required'=>'required'))}}
+        {{Form::hidden('id_conv', $conv->id)}}
+        {{Form::submit('Envoyer')}}
+    {{ Form::close() }}
+    @foreach($messages as $message)
+        @if(Sentinel::getUser()->id == $message->senderId)
+            @if(Sentinel::inRole('expert'))  
+                Votre réponse est:
+            @else
+               Votre question est:
+            @endif
+            {{$message->content}}
+            {{$message->created}}
+        @else
+            {{$message->content}}
+            {{$message->created}}
+        @endif
+        <br>
+    @endforeach
+@else
     @if(Sentinel::inRole('expert'))
         <h2>Voici la question du patient</h2>
         <span>répondez à sa question</span>    
@@ -58,7 +80,7 @@
     @if(Sentinel::inRole('user') && 
         count($messages)==2 &&
         $conv->closed == 0  && 
-        ($conv->satisfied == 1 || $conv->further ==1 ))
+        ($conv->satisfied == 0   || $conv->further ==0 ))
         {{ Form::open(array('route' => ['convs.close',$conv->id])) }}
             {{Form::hidden('satisfied',0 )}}
             {{Form::hidden('expertId', $expertId)}}
@@ -71,4 +93,5 @@
             {{Form::submit('cette réponse me convient')}}
         {{ Form::close() }}
     @endif
+@endif
 @stop

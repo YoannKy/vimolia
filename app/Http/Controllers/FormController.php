@@ -28,8 +28,10 @@ class FormController extends Controller
     {
         if (Sentinel::inRole('expert')) {
             $forms = Form::where('expert_id', Sentinel::getUser()->id)->get();
-        } else if (Sentinel::inRole('admin')) {
+        } else if (Sentinel::inRole('administrateur')) {
             $forms = Form::all();
+        } else  if(Sentinel::inRole('user')){
+            $forms = Form::where('user_id', Sentinel::getUser()->id)->get();
         }
         return view('forms.index')->with('forms', $forms);
     }
@@ -49,8 +51,7 @@ class FormController extends Controller
         }]);
         if (count($user->convs) == 0) {
             return redirect()->route('convs.index');
-        } else {
-        }
+        } 
         return view('forms.create');
     }
 

@@ -8,7 +8,7 @@
 {{$form->town}}
 {{$form->symptom}}
 {{$form->info}}
-@if(Sentinel::inRole('experts'))
+@if(Sentinel::inRole('expert'))
 	{!! link_to(route('forms.doctors.list',$form->id), 'mettre en relation') !!}
 @endif
 @stop

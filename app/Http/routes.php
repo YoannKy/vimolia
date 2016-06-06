@@ -63,7 +63,7 @@
 
         Route::get('experts', ['as' => 'experts.index', 'uses' => 'UserController@experts']);
 
-        Route::get('convs/create', ['as' => 'convs.create', 'uses' => 'ConvController@create']);
+        Route::get('convs/create/{id_user?}', ['as' => 'convs.create', 'uses' => 'ConvController@create']);
         
         Route::post('convs/{id}/close', ['as' => 'convs.close', 'uses' => 'ConvController@close']);
 
@@ -75,6 +75,8 @@
         
         Route::post('forms/{id}/addDoctors', ['as' => 'forms.doctors.add', 'uses' => 'FormController@addDoctors']);
 
+        Route::get('doctors/list', ['as' => 'users.doctor.list', 'uses' => 'UserController@doctors']);
 
+         Route::get('experts/list', ['as' => 'users.expert.list', 'uses' => 'UserController@experts']);
 
     });

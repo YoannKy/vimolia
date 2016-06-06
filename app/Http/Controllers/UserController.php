@@ -251,9 +251,17 @@ class UserController extends Controller
      * @param  none
      * @return \App\Model\User
      */
+    public function doctors()
+    {
+        $doctors = User::listDoctors();
+
+        return view('Centaur::doctors.index')
+                ->with('doctors', $doctors);
+    }
+
     public function experts()
     {
-        $experts = User::listExpertsFromLastWeek();
+        $experts = User::listExperts();
 
         return view('Centaur::experts.index')
                 ->with('experts', $experts);

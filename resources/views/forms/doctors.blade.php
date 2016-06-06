@@ -2,7 +2,7 @@
 @section('title', 'Liste des médecins')
 
 @section('content')
-@if(Sentinel::inRole('experts','administrateur'))
+@if(Sentinel::inRole('expert','administrateur'))
 	<h2>liste des médecins</h2>
 	{{ Form::open(array('route' => ['forms.doctors.add',$formId])) }}
 	@foreach($doctors as $index => $doctor)
