@@ -1,0 +1,148 @@
+/**** CONFIG DE BASE ****/
+body {
+    padding-top: 50px;
+    background: #e6e6e6;
+}
+header{
+    position: relative;
+    top: -50px;
+    width: 60%;
+    margin: 0 auto;
+}
+header #logo{
+    margin: 0 0 0 ;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+.starter-template h1{
+    text-align: left;
+}
+.starter-template p{
+    text-align: left;
+}
+.col-lg-offset-6 {
+    margin-left: 50%;
+}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.navbar{
+    margin: 0;
+    position: relative;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4c4c4c+0,1c1c1c+100,2b2b2b+100,474747+100,2c2c2c+100,000000+100,111111+100,131313+100 */
+    background: #4c4c4c; /* Old browsers */
+    background: -moz-linear-gradient(top,  #4c4c4c 0%, #1c1c1c 100%, #2b2b2b 100%, #474747 100%, #2c2c2c 100%, #000000 100%, #111111 100%, #131313 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #4c4c4c 0%,#1c1c1c 100%,#2b2b2b 100%,#474747 100%,#2c2c2c 100%,#000000 100%,#111111 100%,#131313 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #4c4c4c 0%,#1c1c1c 100%,#2b2b2b 100%,#474747 100%,#2c2c2c 100%,#000000 100%,#111111 100%,#131313 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
+}
+.navbar ul li{
+    text-transform: uppercase;
+}
+.navbar ul li.active, .navbar ul li:hover{
+    background: #85195c;
+}
+
+/**** PAGE CHAT ****/
+.question{
+    margin: 0;
+    padding: 0;
+}
+.question .avatar{
+    margin: 0;
+}
+.question .avatar img{
+    border: 2px solid silver;
+}
+.question .message textarea{
+    width: 100%;
+    height: 130px;
+    padding: 5px;
+    border: 2px solid silver;
+}
+.question .message span{
+    font-style: italic;
+    float: right;
+}
+.question .message button{
+    float: right;
+    background: white;
+    border: 2px solid silver;
+    padding: 10px 8px 10px 8px;
+}
+.reponse{
+    margin: 0;
+    padding: 0;
+}
+.reponse .avatar{
+    margin: 0;
+}
+.reponse .avatar img{
+    border: 2px solid silver;
+}
+.reponse .message div p{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    border: 2px solid silver;
+    text-align: justify;
+}
+.reponse .message span{
+    font-style: italic;
+    float: right;
+}
+.reponse .message button{
+    float: right;
+    background: white;
+    border: 2px solid silver;
+    padding: 10px 8px 10px 8px;
+}
+.utilisateur{
+    margin: 70px 0 0 0;
+}
+.utilisateur .avatar img{
+    width: 80px;
+    border: 2px solid silver;
+}
+.utilisateur .nom{
+    margin: 0 0 0 -30px;
+}
+.menuProfil ul{
+    background-color: silver;
+}
+.menuProfil ul li.hover{
+    background: #4c4c4c;
+}
+.menuProfil .boutonDetails{
+    margin: 0 0 0 0;
+}
+
+/**** PAGE LISTE PRATICIENS ****/
+#patricien ul{
+    padding: 0 12px 0 12px;
+}
+#praticien h3{
+    text-align: center;
+}
+
+/**** MEDIA QUERIES ****/
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
