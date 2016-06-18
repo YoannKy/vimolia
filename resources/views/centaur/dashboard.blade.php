@@ -6,14 +6,14 @@
 <div class="row">
     @if (Sentinel::check())
     <div class="jumbotron">
-        <h1>Hello, {{ Sentinel::getUser()->email }}!</h1>
-        <p>You are now logged in.</p>
+        <h1>Bonjour, {{ Sentinel::getUser()->email }}!</h1>
+        <p>Vous êtes connectés.</p>
     </div>
     @else
         <div class="jumbotron">
-            <h1>Welcome, Guest!</h1>
-            <p>You must login to continue.</p>
-            <p><a class="btn btn-primary btn-lg" href="{{ route('auth.login.form') }}" role="button">Log In</a></p>
+            <h1>Bienvenue</h1>
+            <p>Vous devez vous inscrire pour continuer.</p>
+            <p><a class="btn btn-primary btn-lg" href="{{ route('auth.login.form') }}" role="button">Connexion</a></p>
         </div>
     @endif
 
