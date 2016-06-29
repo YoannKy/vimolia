@@ -19,17 +19,19 @@ class Conv extends Model
         return $this->hasMany('App\Models\Message');
     }
 
-    public static function setConvAttribute($id, $attribute, $isAttribute)
+    public static function setConvAttribute($id, $attributeName, $attribute)
     {
         $conv = Conv::find($id);
-        if ($attribute == 'closed') {
-            $conv->closed= $isAttribute;
-        } else if ($attribute == 'satisfied') {
-            $conv->satisfied= $isAttribute;
-        } else if ($attribute == 'public') {
-              $conv->public= $isAttribute;
-        } else if ($attribute == 'further') {
-              $conv->further= $isAttribute;
+        if ($attributeName == 'closed') {
+            $conv->closed= $attribute;
+        } else if ($attributeName == 'satisfied') {
+            $conv->satisfied= $attribute;
+        } else if ($attributeName == 'public') {
+              $conv->public= $attribute;
+        } else if ($attributeName == 'further') {
+              $conv->further= $attribute;
+        } else if ($attributeName == 'title') {
+              $conv->title= $attribute;
         }
         $conv->save();
     }

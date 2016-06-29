@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterConversationsTableAddSatisfiedPublicClosedFurther extends Migration
+class AlterConversationsTableAddSatisfiedPublicClosedFurtherTitle extends Migration
 {
     /**
      * Run the migrations.
@@ -17,6 +17,7 @@ class AlterConversationsTableAddSatisfiedPublicClosedFurther extends Migration
             $table->boolean('public');
             $table->boolean('closed');
             $table->boolean('further');
+            $table->string('title');
          });
     }
 
@@ -32,6 +33,7 @@ class AlterConversationsTableAddSatisfiedPublicClosedFurther extends Migration
             $table->dropColumn('public');
             $table->dropColumn('closed');
             $table->dropColumn('further');
+            $table->dropColumn('title');
         });
     }
 }

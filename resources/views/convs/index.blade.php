@@ -4,6 +4,7 @@
 @section('content')
 <h2>Liste de vos conversations</h2>
 @foreach($convs as $index => $conv)
+    Sujet : {{ $conv->title }}
     {{$conv->participant->first_name}}
     <br>
     {{$conv->participant->last_name}}

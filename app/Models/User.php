@@ -7,14 +7,7 @@ use Carbon\Carbon;
 use Sentinel;
 
 class User extends EloquentUser
-{
-   
-    public function roles()
-    {
-        return  $this->belongsToMany('App\Models\Role', 'role_users', 'user_id', 'role_id');
-    }
-
-
+{   
     public function convs()
     {
         return  $this->belongsToMany('App\Models\Conv', 'conv_users', 'user_id', 'conv_id');

@@ -1,7 +1,7 @@
 @extends('Centaur::layout')
 @section('title', 'Messages')
 @section('content')
-@if(Sentinel::inRole('expert') || (Sentinel::inRole('practicien')))
+@if((Sentinel::inRole('expert') && count($messages) ==0 )|| (Sentinel::inRole('practicien')))
     {{ Form::open(array('route' => ['convs.addMessage',$conv->id])) }}
         {{Form::text('message',null,array('required'=>'required'))}}
         {{Form::hidden('id_conv', $conv->id)}}
@@ -24,17 +24,24 @@
     @endforeach
 @else
     @if(Sentinel::inRole('expert'))
-        <h2>Voici la question du patient</h2>
-        <span>répondez à sa question</span>    
+        <h2>Sujet: {{$conv->title}}  </h2>
+        <span>répondez à la question du patient</span>    
     @else
         <h2>Posez votre question</h2>
         <span>Un expert y répondra dans les plus brefs délais</span>
     @endif
     @if(empty($messages) || (Sentinel::inRole('expert')) && count($messages) < 2)
         {{ Form::open(array('route' => ['convs.addMessage',$conv->id])) }}
-            {{Form::text('message',null,array('required'=>'required'))}}
+            @if(count($messages) == 0) 
+                {{Form::label('title', 'Titre de ma question')}}
+                {{Form::text('title',null,array('required'=>'required','id'=>'title'))}}
+            @endif
+            {{Form::label('message', 'ma question')}}
+            {{Form::textarea('message',null,array('required'=>'required','id'=>'message'))}}
             {{Form::hidden('id_conv', $conv->id)}}
-            @if(Sentinel::inRole('expert'))  
+            @if(Sentinel::inRole('expert')) 
+                {{Form::label('default', 'Réponse par défaut')}}
+                {{Form::checkbox('default', 'true') }}
                 {{Form::submit('Je valide ma réponse')}}
             @else
                 @if(Sentinel::inRole('user'))
@@ -62,8 +69,8 @@
             {{$message->content}}
             {{$message->created}}
         @else
-            @if(Sentinel::inRole('expert'))  
-                La question du patient est:
+            @if(Sentinel::inRole('expert'))
+                Sa question est:
             @else
                 <?php
                 if (is_null($expertId)) {
@@ -94,4 +101,20 @@
         {{ Form::close() }}
     @endif
 @endif
+<script type="text/javascript">
+    $(function(){
+        (function() {
+            var prevMessage = $('#message').val(); 
+            $('#default').on('change',function(){
+                if($(this).is(':checked')){
+                    prevMessage = $('#message').val(); 
+                    $('#message').val("Bonjour , nous avons bien pris connaissance de votre demande , nous vous conseillons d'aller voir la video : http://youtube.com , si cela ne vous aide pas revenez vers nous.");
+                } else {
+                    $('#message').val(prevMessage);
+
+                }
+            });
+        })();
+    });   
+</script>
 @stop

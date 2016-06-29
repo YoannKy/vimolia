@@ -34,6 +34,7 @@ class ConvController extends Controller
         foreach ($convs as $conv) {
             $participants = $this->getUniqueParticipants($participants, $conv->getAllParticipants());
             $conv->participant = User::getParticipants($participants);
+            $conv->title = Conv::find($conv->getId())->title;
         }
         return view('convs.index', ['convs' => $convs]);
     }
@@ -86,6 +87,7 @@ class ConvController extends Controller
         $conv = TBMsg::addMessageToConversation($id, Sentinel::getUser()->id, $request->input('message'));
         if (Sentinel::inRole('user')) {
             Conv::setConvAttribute($id, 'public', $request->has('public'));
+            Conv::setConvAttribute($id, 'title', $request->get('title'));
         }
         return redirect(route('convs.show', ['id' => $id]));
     }
