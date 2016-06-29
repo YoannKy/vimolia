@@ -10,6 +10,7 @@ use Sentinel;
 use Illuminate\Support\Facades\Input;
 use stdClass;
 use TBMsg;
+use Config;
 use Session;
 
 class ConvController extends Controller
@@ -59,6 +60,8 @@ class ConvController extends Controller
      */
     public function show($id)
     {
+        $youtubeKey = Config::get('api.youtube');
+
         $conv = TBMsg::getConversationMessages($id, Sentinel::getUser()->id);
 
         if (count($conv->getNumOfParticipants()) == 0) {
@@ -79,7 +82,7 @@ class ConvController extends Controller
 
         $conv = Conv::find($id);
 
-        return view('convs.show', ['messages' => $history, 'conv'=>$conv]);
+        return view('convs.show', ['messages' => $history, 'conv'=>$conv, 'key'=>$youtubeKey]);
     }
 
     public function addMessage(Request $request, $id)
@@ -87,8 +90,9 @@ class ConvController extends Controller
         $conv = TBMsg::addMessageToConversation($id, Sentinel::getUser()->id, $request->input('message'));
         if (Sentinel::inRole('user')) {
             Conv::setConvAttribute($id, 'public', $request->has('public'));
-            Conv::setConvAttribute($id, 'title', $request->get('title'));
         }
+        Conv::setConvAttribute($id, 'title', $request->get('title'));
+        Conv::setConvAttribute($id, 'video', $request->get('video'));
         return redirect(route('convs.show', ['id' => $id]));
     }
 

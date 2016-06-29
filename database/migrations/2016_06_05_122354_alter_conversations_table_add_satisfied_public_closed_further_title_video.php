@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterConversationsTableAddSatisfiedPublicClosedFurtherTitle extends Migration
+class AlterConversationsTableAddSatisfiedPublicClosedFurtherTitleVideo extends Migration
 {
     /**
      * Run the migrations.
@@ -18,6 +18,7 @@ class AlterConversationsTableAddSatisfiedPublicClosedFurtherTitle extends Migrat
             $table->boolean('closed');
             $table->boolean('further');
             $table->string('title');
+            $table->string('video');
          });
     }
 

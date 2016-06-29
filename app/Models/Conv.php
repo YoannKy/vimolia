@@ -32,6 +32,8 @@ class Conv extends Model
               $conv->further= $attribute;
         } else if ($attributeName == 'title') {
               $conv->title= $attribute;
+        } else if ($attributeName == 'video') {
+              $conv->video= $attribute;
         }
         $conv->save();
     }
