@@ -7,10 +7,10 @@
         <div class='btn-toolbar pull-right'>
             <a class="btn btn-primary btn-lg" href="{{ route('users.create') }}">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                Create User
+                Créer un utilisateur
             </a>
         </div>
-        <h1>Users</h1>
+        <h1>Utilisateurs</h1>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

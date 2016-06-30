@@ -167,7 +167,7 @@
             {{$message->created}}
             @if($conv->video != null)
                 Une vidéo à été postée pour cette question/réponse:
-                <a href="https://youtube.com/watch?v={{$conv->video}}" target="_blank">la vidéo
+                <a href="https://youtube.com/watch?v={{$conv->video}}" target="_blank">la vidéo</a>
             @endif
         @endif
         <br>

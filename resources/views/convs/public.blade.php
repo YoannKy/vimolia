@@ -3,10 +3,13 @@
 
 @section('content')
 <h2>Liste des questions publiques</h2>
+<div class="list-group">
 @foreach($convs as $index => $conv)
-    <a class="lien" href="{{route('convs.show',$conv->id)}}">
-    Sujet : {{ $conv->title }}
-        Voir la question
-    </a>
+   <div class=" list-group-item">
+    Sujet: {{ $conv->title }}
+  	<br>
+    <a class="lien" href="{{route('convs.show',$conv->id)}}">Voir la question</a>
+    </div>
 @endforeach
+</div>
 @stop

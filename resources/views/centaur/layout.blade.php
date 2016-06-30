@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+        <!-- Bootstrap core CSS -->
+        <link href="/css/style.css" rel="stylesheet">
+
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,6 +32,12 @@
       
     </head>
     <body>
+        <header>
+            <div id="logo">
+                <img src="/images/logo.png" alt="logo" />
+            </div>
+        </header>
+
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -39,40 +48,44 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Vimolia</a>
+                    <!--<a class="navbar-brand" href="/">Vimolia</a>-->
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        @if (Sentinel::check() && Sentinel::inRole('administrateur'))
-                            <li class="{{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Users</a></li>
-                            <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
-                            <li class="{{ Request::is('forms*') ? 'active' : '' }}"><a href="{{ route('forms.index') }}">Forms</a></li>
-                        @elseif(Sentinel::check())
-                             <li><a href="{{ route('convs.index') }}">Messages({{$unread}})</a></li>
-                             <li><a href="{{ route('convs.public') }}">Questions publiques</a></li> 
-                             @if(Sentinel::inRole('user'))
-                             <li><a href="{{ route('convs.create') }}">Poser une question</a></li>
-                             <li><a href="{{ route('forms.list') }}">Formulaires</a></li>
-                             <li><a href="{{ route('users.doctor.list') }}">Practiciens</a></li>
-                             @elseif(Sentinel::inRole('expert'))
-                             <li><a href="{{ route('forms.index') }}">Demandes avec un practicien</a></li>
-                             <li><a href="{{ route('users.doctor.list') }}">Contacter un practicien</a></li>
-                             @elseif(Sentinel::inRole('practicien'))
-                             <li><a href="{{ route('users.expert.list') }}">Contacter un expert</a></li>
-                             @endif
-                        @endif
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        @if (Sentinel::check())
-                            <li><p class="navbar-text">{{ Sentinel::getUser()->email }}</p></li>
-                            <li><a href="{{ route('auth.logout') }}">Log Out</a></li>
-                        @else
-                            <li><a href="{{ route('auth.login.form') }}">Login</a></li>
-                            <li><a href="{{ route('auth.register.form') }}">Register</a></li>
-                        @endif
-                    </ul>
-                </div><!-- /.navbar-collapse -->
+                <div class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                @if (Sentinel::check() && Sentinel::inRole('administrateur'))
+                                    <li class="{{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Utilisateurs</a></li>
+                                    <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
+                                    <li class="{{ Request::is('forms*') ? 'active' : '' }}"><a href="{{ route('forms.index') }}">Roles</a></li>
+                                @elseif(Sentinel::check())
+                                     <li><a href="{{ route('convs.index') }}">Messages 
+                                     @if($unread > 0)  
+                                        <span class="label label-danger">({{$unread}})</span> 
+                                        @endif
+                                     </a></li>
+                                     <li><a href="{{ route('convs.public') }}">Questions publiques</a></li>
+                                     @if(Sentinel::inRole('user'))
+                                     <li><a href="{{ route('convs.create') }}">Poser une question</a></li>
+                                     <li><a href="{{ route('forms.list') }}">Formulaires</a></li>
+                                     @elseif(Sentinel::inRole('expert'))
+                                     <li><a href="{{ route('forms.index') }}">Demandes avec un practicien</a></li>
+                                     @endif
+                                @endif
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                @if (Sentinel::check())
+                                    <li><p class="navbar-text">{{ Sentinel::getUser()->email }}</p></li>
+                                    <li><a href="{{ route('auth.logout') }}">Déconnexion</a></li>
+                                @else
+                                    <li><a href="{{ route('auth.login.form') }}">Connexion</a></li>
+                                    <li><a href="{{ route('auth.register.form') }}">Inscription</a></li>
+                                @endif
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div>
+                </div>
             </div><!-- /.container-fluid -->
         </nav>
         <div class="container">
@@ -82,5 +95,12 @@
 
         <!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
         <script src="{{ asset('restfulizer.js') }}"></script>
+
+
+                <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>

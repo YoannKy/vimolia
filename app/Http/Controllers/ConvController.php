@@ -32,10 +32,13 @@ class ConvController extends Controller
         $convs = TBMsg::getUserConversations(Sentinel::getUser()->id);
         $participants = [];
         $finalParticipants = [];
+        $convTmp = "";
         foreach ($convs as $conv) {
+            $convTmp = Conv::find($conv->getId());
             $participants = $this->getUniqueParticipants($participants, $conv->getAllParticipants());
             $conv->participant = User::getParticipants($participants);
-            $conv->title = Conv::find($conv->getId())->title;
+            $conv->title = $convTmp->title;
+            $conv->satisfied = $convTmp->satisfied;
         }
         return view('convs.index', ['convs' => $convs]);
     }
