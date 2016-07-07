@@ -65,8 +65,8 @@ class ConvController extends Controller
     {
         $youtubeKey = Config::get('api.youtube');
 
-        $conv = TBMsg::getConversationMessages($id, Sentinel::getUser()->id);
-
+        // $conv = TBMsg::getConversationMessages($id, Sentinel::getUser()->id);
+        return TBMsg::removeInactiveUsersFromConversation(1);
         if (count($conv->getNumOfParticipants()) == 0) {
             return redirect(route('convs.index'));
         }

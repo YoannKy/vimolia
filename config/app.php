@@ -160,13 +160,13 @@ return [
          * Packages Service Providers...
          */
          Centaur\CentaurServiceProvider::class,
-         Tzookb\TBMsg\TBMsgServiceProvider::class,
          Collective\Html\HtmlServiceProvider::class,
 
          /*
          * Custom Service Providers...
          */
          App\Providers\ViewServiceProvider::class,
+         App\Providers\CustomTBMsgServiceProvider::class,
     ],
 
     /*
