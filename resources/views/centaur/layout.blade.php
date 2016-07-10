@@ -10,10 +10,12 @@
         <!-- Bootstrap - Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
         <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/style.css" rel="stylesheet">
 
+        <!-- Custom styles for this template -->
+        <link href="bootstrap/css/starter-template.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,23 +23,8 @@
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
- 
-          <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/i18n/fr.js"></script>
-        <!-- Latest compiled and minified Bootstrap JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-      
     </head>
     <body>
-        <header>
-            <div id="logo">
-                <img src="/images/logo.png" alt="logo" />
-            </div>
-        </header>
-
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -51,7 +38,7 @@
                     <!--<a class="navbar-brand" href="/">Vimolia</a>-->
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar navbar-custom     navbar-fixed-top">
                     <div class="container">
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
@@ -60,11 +47,7 @@
                                     <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
                                     <li class="{{ Request::is('forms*') ? 'active' : '' }}"><a href="{{ route('forms.index') }}">Roles</a></li>
                                 @elseif(Sentinel::check())
-                                     <li><a href="{{ route('convs.index') }}">Messages 
-                                     @if($unread > 0)  
-                                        <span class="label label-danger">({{$unread}})</span> 
-                                        @endif
-                                     </a></li>
+                                     <li><a href="{{ route('convs.index') }}">Messages({{$unread}})</a></li>
                                      <li><a href="{{ route('convs.public') }}">Questions publiques</a></li>
                                      @if(Sentinel::inRole('user'))
                                      <li><a href="{{ route('convs.create') }}">Poser une question</a></li>
@@ -93,6 +76,10 @@
             @yield('content')
         </div>
 
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Latest compiled and minified Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <!-- Restfulizer.js - A tool for simulating put,patch and delete requests -->
         <script src="{{ asset('restfulizer.js') }}"></script>
 
@@ -100,6 +87,9 @@
                 <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>

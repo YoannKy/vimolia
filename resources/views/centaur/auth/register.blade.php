@@ -25,23 +25,23 @@
                         {!! ($errors->has('password_confirmation') ? $errors->first('password_confirmation', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
                     <div class="form-group {{ ($errors->has('first_name')) ? 'has-error' : '' }}">
-                        <input class="form-control" placeholder="First Name" name="first_name" type="text"/>
+                        <input class="form-control" placeholder="Prénom" name="first_name" type="text"/>
                         {!! ($errors->has('first_name') ? $errors->first('first_name', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
                     <div class="form-group {{ ($errors->has('last_name')) ? 'has-error' : '' }}">
-                        <input class="form-control" placeholder="Last Name" name="last_name" type="text"/>
+                        <input class="form-control" placeholder="Nom" name="last_name" type="text"/>
                         {!! ($errors->has('last_name') ? $errors->first('last_name', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
                     <div class="form-group {{ ($errors->has('address')) ? 'has-error' : '' }}">
-                        <input class="form-control" placeholder="Address" name="address" type="text"/>
+                        <input class="form-control" placeholder="Adresse" name="address" type="text"/>
                         {!! ($errors->has('address') ? $errors->first('address', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
                     <div class="form-group {{ ($errors->has('date_of_birth')) ? 'has-error' : '' }}">
-                        <input class="form-control" placeholder="Date of birth" name="date_of_birth" type="text"/>
+                        <input class="form-control" placeholder="Date de naissance" name="date_of_birth" type="text"/>
                         {!! ($errors->has('date_of_birth') ? $errors->first('date_of_birth', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
                     <div class="form-group {{ ($errors->has('phone_number')) ? 'has-error' : '' }}">
-                        <input class="form-control" placeholder="Phone number" name="phone_number" type="text"/>
+                        <input class="form-control" placeholder="Numéro de téléphone" name="phone_number" type="text"/>
                         {!! ($errors->has('phone_number') ? $errors->first('phone_number', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
                     <input name="_token" value="{{ csrf_token() }}" type="hidden">

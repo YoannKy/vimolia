@@ -1,16 +1,6 @@
 /**** CONFIG DE BASE ****/
 body {
-    padding-top: 50px;
     background: #e6e6e6;
-}
-header{
-    position: relative;
-    top: -50px;
-    width: 60%;
-    margin: 0 auto;
-}
-header #logo{
-    margin: 0 0 0 ;
 }
 .starter-template {
     padding: 40px 15px;
@@ -25,27 +15,286 @@ header #logo{
 .col-lg-offset-6 {
     margin-left: 50%;
 }
-.container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+.container .AccueilMsg {
+    color: black;
+    border-radius: 0!important;
+    background: #eaeaea;
+    margin: -15px 15px 0 15px;
+    padding: 10px 10px 5px 10px;
 }
-.navbar{
+.container .AccueilMsg p{
+    font-size: 25px;
+}
+.container .AccueilMsg p span{
+    font-size: 15px;
+}
+.accueil{
+    background: url('/images/bg.jpg') no-repeat;
+    height: 500px;
     margin: 0;
-    position: relative;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4c4c4c+0,1c1c1c+100,2b2b2b+100,474747+100,2c2c2c+100,000000+100,111111+100,131313+100 */
-    background: #4c4c4c; /* Old browsers */
-    background: -moz-linear-gradient(top,  #4c4c4c 0%, #1c1c1c 100%, #2b2b2b 100%, #474747 100%, #2c2c2c 100%, #000000 100%, #111111 100%, #131313 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  #4c4c4c 0%,#1c1c1c 100%,#2b2b2b 100%,#474747 100%,#2c2c2c 100%,#000000 100%,#111111 100%,#131313 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  #4c4c4c 0%,#1c1c1c 100%,#2b2b2b 100%,#474747 100%,#2c2c2c 100%,#000000 100%,#111111 100%,#131313 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
 }
-.navbar ul li{
+nav .navbar-custom{
+    margin: 0;
+    background: #85195c;
+    color: white;
+}
+nav .navbar ul li{
     text-transform: uppercase;
 }
-.navbar ul li.active, .navbar ul li:hover{
+nav .navbar ul li.active, nav .navbar ul li:hover{
+    background: #70144c;
+    color: white!important;
+}
+
+/* SURCHARGE BOOTSTRAP */
+.navbar-default .navbar-text{
+    color: white;
+}
+.navbar-default .navbar-nav> li > a, .navbar-default .navbar-nav> li > a:hover{
+    color: white;
+}
+form .btn-primary{
     background: #85195c;
+    border: 1px solid #85195c;
+}
+form .btn-primary:hover{
+    background: #70144c;
+    border: 1px solid #70144c;
+}
+section{
+    margin: 0 0 50px 0;
+}
+section p{
+    font-size: 50px;
+    text-transform: uppercase;
+    text-align: center;
+}
+section p span{
+    color: #85195c;
+}
+section .WelcomeMsg{
+    font-size: 20px;
+    text-transform: lowercase;
+}
+#blocPresentation{
+    width: 90%;
+    margin: 0 auto;
+}
+#blocPresentation .blocButton a{
+    background: #85195c;
+}
+.skills{
+    text-align: center;
+}
+.btn-circle.btn-xl {
+    width: 150px;
+    height: 150px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: #911a63;
+    -webkit-box-shadow: 0 0 25px 0 #4A4A4A;
+    box-shadow: 0 0 25px 0 #4A4A4A;
+}
+.btn-circle.btn-xl:focus{
+    outline:none;
+}
+.btn-circle.btn-xl:hover{
+    background: #85195c;
+}
+.btn-circle.btn-xl i{
+    color: white;
+}
+.skills p{
+    margin: 10px 0 0 0;
+    font-weight: bold;
+}
+
+/*timeline*/
+.timeline {
+    list-style: none;
+    padding: 20px 0 20px;
+    position: relative;
+}
+
+    .timeline:before {
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        content: " ";
+        width: 3px;
+        background-color: #eeeeee;
+        left: 50%;
+        margin-left: -1.5px;
+    }
+
+    .timeline > li {
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+        .timeline > li:before,
+        .timeline > li:after {
+            content: " ";
+            display: table;
+        }
+
+        .timeline > li:after {
+            clear: both;
+        }
+
+        .timeline > li:before,
+        .timeline > li:after {
+            content: " ";
+            display: table;
+        }
+
+        .timeline > li:after {
+            clear: both;
+        }
+
+        .timeline > li > .timeline-panel {
+            width: 46%;
+            float: left;
+            border: 1px solid #d4d4d4;
+            border-radius: 2px;
+            padding: 20px;
+            position: relative;
+            -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+        }
+
+            .timeline > li > .timeline-panel:before {
+                position: absolute;
+                top: 26px;
+                right: -15px;
+                display: inline-block;
+                border-top: 15px solid transparent;
+                border-left: 15px solid #ccc;
+                border-right: 0 solid #ccc;
+                border-bottom: 15px solid transparent;
+                content: " ";
+            }
+
+            .timeline > li > .timeline-panel:after {
+                position: absolute;
+                top: 27px;
+                right: -14px;
+                display: inline-block;
+                border-top: 14px solid transparent;
+                border-left: 14px solid #fff;
+                border-right: 0 solid #fff;
+                border-bottom: 14px solid transparent;
+                content: " ";
+            }
+
+        .timeline > li > .timeline-badge {
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 1.4em;
+            text-align: center;
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            margin-left: -25px;
+            background-color: #911a63;
+            z-index: 100;
+            border-top-right-radius: 50%;
+            border-top-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+
+        .timeline > li.timeline-inverted > .timeline-panel {
+            float: right;
+        }
+
+            .timeline > li.timeline-inverted > .timeline-panel:before {
+                border-left-width: 0;
+                border-right-width: 15px;
+                left: -15px;
+                right: auto;
+            }
+
+            .timeline > li.timeline-inverted > .timeline-panel:after {
+                border-left-width: 0;
+                border-right-width: 14px;
+                left: -14px;
+                right: auto;
+            }
+
+.timeline-badge.primary {
+    background-color: #2e6da4 !important;
+}
+
+.timeline-badge.success {
+    background-color: #3f903f !important;
+}
+
+.timeline-badge.warning {
+    background-color: #f0ad4e !important;
+}
+
+.timeline-badge.danger {
+    background-color: #d9534f !important;
+}
+
+.timeline-badge.info {
+    background-color: #5bc0de !important;
+}
+
+.timeline-title {
+    margin-top: 0;
+    color: inherit;
+}
+
+.timeline-body > p,
+.timeline-body > ul {
+    margin-bottom: 0;
+}
+
+    .timeline-body > p + p {
+        margin-top: 5px;
+    }
+
+@media (max-width: 767px) {
+    ul.timeline:before {
+        left: 40px;
+    }
+
+    ul.timeline > li > .timeline-panel {
+        width: calc(100% - 90px);
+        width: -moz-calc(100% - 90px);
+        width: -webkit-calc(100% - 90px);
+    }
+
+    ul.timeline > li > .timeline-badge {
+        left: 15px;
+        margin-left: 0;
+        top: 16px;
+    }
+
+    ul.timeline > li > .timeline-panel {
+        float: right;
+    }
+
+        ul.timeline > li > .timeline-panel:before {
+            border-left-width: 0;
+            border-right-width: 15px;
+            left: -15px;
+            right: auto;
+        }
+
+        ul.timeline > li > .timeline-panel:after {
+            border-left-width: 0;
+            border-right-width: 14px;
+            left: -14px;
+            right: auto;
+        }
 }
 
 /**** PAGE CHAT ****/
@@ -129,6 +378,41 @@ header #logo{
 #praticien h3{
     text-align: center;
 }
+
+/**** PATIENT : PAGE POSER UNE QUESTION ****/
+input[type=submit]{
+    background: #85195c;
+    color: white;
+    border-radius: 4px;
+    border: 1px solid silver;
+    margin: 10px 0 0 0;
+    padding: 8px;
+    font-size: 18px;
+}
+
+/**** PAGE RESULTAT QUESTION ****/
+h2, h3{
+    background: white;
+    padding: 10px;
+    border-bottom: 2px solid #85195c;
+}
+p.sous-titre, p.reponse, p.question, p.date{
+    padding: 10px;
+}
+
+/**** PAGE CONVERSATION ****/
+.conversation{
+    border: 1px solid #85195c;
+}
+.bouton{
+    background: #85195c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+
+}
+
 
 /**** MEDIA QUERIES ****/
 @media (min-width: 768px) {

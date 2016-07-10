@@ -5,25 +5,26 @@
 <h2>Liste de vos conversations</h2>
 <div class="list-group">
 @foreach($convs as $index => $conv)
-   <div class=" list-group-item @if($conv->satisfied) list-group-item-success @endif">
-    Sujet: {{ $conv->title }}
+   <div class="conversation list-group-item @if($conv->satisfied) list-group-item-success @endif">
+    Sujet : {{ $conv->title }}
     <br>
-    De: {{$conv->participant->first_name}} {{$conv->participant->last_name}}
+    De : {{$conv->participant->first_name}} {{$conv->participant->last_name}}
     <br>
     @if($conv->satisfied)
-    Statut: Répondu
+    Statut : Répondu
     @else 
-    Statut: En attente
+    Statut : En attente
     @endif
-    <br>
+    <br><br>
     <a class="lien" href="{{route('convs.show',$conv->getId())}}">
         @if(Sentinel::inRole('expert'))
-            Répondre à la question du patient
+            <button type="button" class="bouton">Répondre à la question du patient</button>
         @else      
-           Voir la question que j'ai posé
+            <button type="button" class="bouton">Voir la question que j'ai posé</button>
         @endif
     </a>
     </div>
+    <br>
 @endforeach
 </div>
 @stop

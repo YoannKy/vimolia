@@ -24,22 +24,26 @@
     @endforeach
 @else
     @if(Sentinel::inRole('expert'))
-        <h2>Sujet: {{$conv->title}}  </h2>
-        <span>répondez à la question du patient</span>    
+        <h2>Sujet : {{$conv->title}}  </h2>
+        <p class="sous-titre">Répondez à la question du patient</p>
+        <br><br><br>
     @else
         <h2>Posez votre question</h2>
-        <span>Un expert y répondra dans les plus brefs délais</span>
+        <p class="sous-titre">Un expert y répondra dans les plus brefs délais</p>
+        <br>
     @endif
     @if(empty($messages) || (Sentinel::inRole('expert')) && count($messages) < 2)
         {{ Form::open(array('route' => ['convs.addMessage',$conv->id])) }}
             @if(count($messages) == 0) 
                 <div class="form-group">
-                {{Form::label('title', 'Titre de ma question')}}
+                <br><br>
+                {{Form::label('title', 'Titre de ma question :')}}
                 {{Form::text('title',null,array('class'=>'form-control','required'=>'required','id'=>'title'))}}
                 </div>
             @endif
-            {{Form::label('message', 'ma réponse')}}
-            {{Form::textarea('message',null,array('class'=>'form-control',   'required'=>'required','id'=>'message'))}}           
+            {{Form::label('message', 'Ma réponse :')}}
+            {{Form::textarea('message',null,array('class'=>'form-control',   'required'=>'required','id'=>'message'))}}     
+            <br>      
             {{Form::hidden('id_conv', $conv->id)}}
             @if(Sentinel::inRole('expert')) 
                 {{Form::label('default', 'Réponse par défaut')}}
@@ -52,7 +56,7 @@
                             $('#default').on('change',function(){
                                 if($(this).is(':checked')){
                                     prevMessage = $('#message').val(); 
-                                    $('#message').val("Bonjour , nous avons bien pris connaissance de votre demande , nous vous conseillons d'aller voir la video ci jointe , si cela ne vous aide pas revenez vers nous.");
+                                    $('#message').val("Bonjour , nous avons bien pris connaissance de votre demande , nous vous conseillons d'aller voir la video ci-jointe , si cela ne vous aide pas revenez vers nous.");
                                 } else {
                                     $('#message').val(prevMessage);
 
@@ -146,27 +150,32 @@
     @foreach($messages as $message)
         @if(Sentinel::getUser()->id == $message->senderId)
             @if(Sentinel::inRole('expert'))  
-                Votre réponse est:
+                <p class="reponse">Votre réponse est:>
             @else
-               Votre question est:
+               <p class="question">Votre question est :
             @endif
-            {{$message->content}}
-            {{$message->created}}
+            {{$message->content}}</p>
+            <p class="date">Publiée le : 
+            {{$message->created}}</p>
+
         @else
             @if(Sentinel::inRole('expert'))
-                Sa question est:
+            <br>
+            <div class="expertReponse">
+                <p class="reponse">Rappel de la question du patient :
             @else
                 <?php
                 if (is_null($expertId)) {
                     $expertId = $message->senderId;
                 }
                 ?>
-                La réponse de l'expert est:
+                La réponse de l'expert est :
             @endif
-            {{$message->content}}
-            {{$message->created}}
+            {{$message->content}}</p>
+            <p class="date">Publiée le : {{$message->created}}</p>
+            </div>
             @if($conv->video != null)
-                Une vidéo à été postée pour cette question/réponse:
+                Une vidéo à été postée pour cette question/réponse :
                 <a href="https://youtube.com/watch?v={{$conv->video}}" target="_blank">la vidéo</a>
             @endif
         @endif
