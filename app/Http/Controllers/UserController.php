@@ -19,6 +19,17 @@ class UserController extends Controller
     /** @var Centaur\AuthManager */
     protected $authManager;
 
+    protected $fillable = [
+        'email',
+        'password',
+        'last_name',
+        'first_name',
+        'permissions',
+        'address',
+        'date_of_birth',
+        'phone_number',
+    ];
+
     public function __construct(AuthManager $authManager)
     {
         // Middleware
@@ -67,16 +78,24 @@ class UserController extends Controller
     {
         // Validate the form data
         $result = $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'date_of_birth' => 'required',
+            'phone_number' => 'required',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|confirmed|min:6'
         ]);
 
-        // Assemble registration credentials and attributes
+        // Assemble registration credentials
         $credentials = [
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'address' => $request->get('address'),
+            'date_of_birth' => $request->get('date_of_birth'),
+            'phone_number' => $request->get('phone_number'),
             'email' => trim($request->get('email')),
-            'password' => $request->get('password'),
-            'first_name' => $request->get('first_name', null),
-            'last_name' => $request->get('last_name', null)
+            'password' => $request->get('password')
         ];
         $activate = (bool)$request->get('activate', false);
 

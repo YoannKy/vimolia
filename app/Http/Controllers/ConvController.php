@@ -10,6 +10,7 @@ use Sentinel;
 use Illuminate\Support\Facades\Input;
 use stdClass;
 use TBMsg;
+use Config;
 use Session;
 
 class ConvController extends Controller
@@ -31,9 +32,13 @@ class ConvController extends Controller
         $convs = TBMsg::getUserConversations(Sentinel::getUser()->id);
         $participants = [];
         $finalParticipants = [];
+        $convTmp = "";
         foreach ($convs as $conv) {
+            $convTmp = Conv::find($conv->getId());
             $participants = $this->getUniqueParticipants($participants, $conv->getAllParticipants());
             $conv->participant = User::getParticipants($participants);
+            $conv->title = $convTmp->title;
+            $conv->satisfied = $convTmp->satisfied;
         }
         return view('convs.index', ['convs' => $convs]);
     }
@@ -58,6 +63,8 @@ class ConvController extends Controller
      */
     public function show($id)
     {
+        $youtubeKey = Config::get('api.youtube');
+
         $conv = TBMsg::getConversationMessages($id, Sentinel::getUser()->id);
 
         if (count($conv->getNumOfParticipants()) == 0) {
@@ -78,7 +85,7 @@ class ConvController extends Controller
 
         $conv = Conv::find($id);
 
-        return view('convs.show', ['messages' => $history, 'conv'=>$conv]);
+        return view('convs.show', ['messages' => $history, 'conv'=>$conv, 'key'=>$youtubeKey]);
     }
 
     public function addMessage(Request $request, $id)
@@ -87,6 +94,8 @@ class ConvController extends Controller
         if (Sentinel::inRole('user')) {
             Conv::setConvAttribute($id, 'public', $request->has('public'));
         }
+        Conv::setConvAttribute($id, 'title', $request->get('title'));
+        Conv::setConvAttribute($id, 'video', $request->get('video'));
         return redirect(route('convs.show', ['id' => $id]));
     }
 
