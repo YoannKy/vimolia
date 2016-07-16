@@ -48,7 +48,7 @@
 
         // Users
         Route::resource('users', 'UserController');
-
+        Route::get('users', ['as' => 'users.profile', 'uses' => 'UserController@profile']);
         // Roles
         Route::resource('roles', 'RoleController');
 

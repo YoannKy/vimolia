@@ -126,30 +126,11 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    /**
-     * Show the form for editing the specified user.
-     *
-     * @param  string  $hash
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function profile()
     {
-        // Fetch the user object
-        // $id = $this->decode($hash);
-        $user = $this->userRepository->findById($id);
+        $user = Sentinel::getUser();
+        return view('Centaur::users.profile', ['users' => $user]);
 
-        // Fetch the available roles
-        $roles = app()->make('sentinel.roles')->createModel()->all();
-
-        if ($user) {
-            return view('Centaur::users.edit', [
-                'user' => $user,
-                'roles' => $roles
-            ]);
-        }
-
-        session()->flash('error', 'Invalid user.');
-        return redirect()->back();
     }
 
     /**
