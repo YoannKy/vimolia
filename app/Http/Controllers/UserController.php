@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Form;
 use Carbon\Carbon;
 use Mail;
 use Sentinel;
@@ -145,11 +146,13 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function profile()
+    public function profile($id)
     {
-        $user = Sentinel::getUser();
-        return view('Centaur::users.profile', ['users' => $user]);
-
+        $user = User::getUser($id);
+        $isFind = Form::isFind($id);
+        $isNoted = Form::isNoted($id);
+        $note = User::getNote($id);
+        return view('Centaur::users.profile', ['user' => $user, 'isFind' => $isFind, 'isNoted' => $isNoted, 'note' => $note]);
     }
 
     /**
@@ -266,4 +269,13 @@ class UserController extends Controller
         return view('Centaur::experts.index')
                 ->with('experts', $experts);
     }
+
+    public function patients()
+    {
+        $patients = User::listPatients();
+
+        return view('patients.index')
+            ->with(['patients' => $patients, 'toto' => Sentinel::getUser()->id]);
+    }
+
 }

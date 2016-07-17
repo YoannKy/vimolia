@@ -5,7 +5,7 @@ namespace App\Models;
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Carbon\Carbon;
 use Sentinel;
-
+use DB;
 class User extends EloquentUser
 {   
     public function convs()
@@ -30,6 +30,11 @@ class User extends EloquentUser
         return User::whereIn('id', $aId)->where('id', '!=', Sentinel::getUser()->id)->first();
     }
 
+
+    public static function getUser($id)
+    {
+        return User::find($id);
+    }
     public static function listDoctors($filter = null)
     {
         if ($filter) {
@@ -45,5 +50,27 @@ class User extends EloquentUser
         return User::whereHas('roles', function ($query) {
             $query->where('roles.slug', 'like', '%expert%');
         })->get();
+    }
+
+    public static function  listPatients()
+    {
+        $users = DB::table('forms')
+            ->join('users', 'users.id', '=', 'forms.user_id')
+            ->select('users.*', 'forms.id as formId', 'forms.has_consultation as isValidate')
+            ->where('forms.choose', Sentinel::getUser()->id)
+            ->get();
+
+        return $users;
+    }
+
+    public static function getNote($id)
+    {
+        $note = DB::table('note_users')
+            ->select(DB::raw('SUM(note) as note, COUNT(note_users.id) as number'))
+            ->where('note_users.doctor_id', $id)
+            ->get();
+        $note = $note[0]->note / $note[0]->number;
+        $note = number_format($note, 1);
+        return $note;
     }
 }
