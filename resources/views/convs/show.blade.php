@@ -150,19 +150,19 @@
     @foreach($messages as $message)
         @if(Sentinel::getUser()->id == $message->senderId)
             @if(Sentinel::inRole('expert'))  
-                <p class="reponse">Votre réponse est:>
+                <p class="reponse">Votre réponse est :
             @else
                <p class="question">Votre question est :
             @endif
             {{$message->content}}</p>
             <p class="date">Publiée le : 
             {{$message->created}}</p>
-
         @else
             @if(Sentinel::inRole('expert'))
             <br>
             <div class="expertReponse">
                 <p class="reponse">Rappel de la question du patient :
+            </div> 
             @else
                 <?php
                 if (is_null($expertId)) {
@@ -173,8 +173,8 @@
             @endif
             {{$message->content}}</p>
             <p class="date">Publiée le : {{$message->created}}</p>
-            </div>
-            @if($conv->video != null)
+              
+                @if($conv->video != null)
                 Une vidéo à été postée pour cette question/réponse :
                 <a href="https://youtube.com/watch?v={{$conv->video}}" target="_blank">la vidéo</a>
             @endif
