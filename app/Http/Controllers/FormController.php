@@ -107,9 +107,27 @@ class FormController extends Controller
         return redirect()->back();
     }
 
+    public function chooseDoctor(Request $request, $id)
+    {
+        Form::chooseDoctors($request->input('doctor'), $id);
+        return redirect()->back();
+    }
+
     public function listForms()
     {
         $forms = Form::getUserForm();
         return view('forms.list')->with('forms', $forms);
+    }
+
+    public function addPatient(Request $request, $id)
+    {
+        Form::addPatient($request->input('validation'), $id);
+        return redirect()->back();
+    }
+
+    public function noteDoctor(Request $request, $id)
+    {
+        Form::noteDoctor($request->input('note'), $id);
+        return redirect()->back();
     }
 }
