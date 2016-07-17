@@ -69,6 +69,9 @@ class User extends EloquentUser
             ->select(DB::raw('SUM(note) as note, COUNT(note_users.id) as number'))
             ->where('note_users.doctor_id', $id)
             ->get();
+        if($note[0]->number == 0) {
+            return null;
+        }
         $note = $note[0]->note / $note[0]->number;
         $note = number_format($note, 1);
         return $note;
