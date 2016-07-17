@@ -91,7 +91,11 @@
                                         params.page = params.page || 1;
 
                                         data.items.forEach(function (item) {
-                                            item.id = item.id.videoId;
+                                            item.id = JSON.stringify({
+                                                id : item.id.videoId,
+                                                thumbnail: item.snippet.thumbnails.default.url,
+                                                title: item.snippet.title
+                                            });
                                             item.text = item.snippet.title;
                                         });
                                         return {
@@ -175,8 +179,21 @@
             <p class="date">Publiée le : {{$message->created}}</p>
               
                 @if($conv->video != null)
-                Une vidéo à été postée pour cette question/réponse :
-                <a href="https://youtube.com/watch?v={{$conv->video}}" target="_blank">la vidéo</a>
+                <div class="row">
+                    <div class="col-xs-12">Une vidéo à été postée pour cette question/réponse :</div>
+                </div>
+                <?php $video = json_decode($conv->video,true); ?>
+                <div class="row well">
+                    <div class="col-sm-2">
+                         <img src="{{$video['thumbnail']}}" style="max-width: 100%"/>
+                    </div>
+                    <div clas="col-sm-10">
+                            <div class="col-sm-6">
+                                <a  href="https://youtube.com/watch?v={{$video["id"]}}" target="_blank">{{$video["title"]}}</a>
+
+                        </div>
+                    </div>
+                </div>
             @endif
         @endif
         <br>

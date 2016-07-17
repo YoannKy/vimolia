@@ -4,10 +4,10 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<h2>Reset Your Password</h2>
+		<h2>Reinitialiser votre mot de passe</h2>
 
-		<p>To change your password, <a href="{{ route('auth.password.reset.form', urlencode($code)) }}">click here.</a></p>
-		<p>Or point your browser to this address: <br /> {!! route('auth.password.reset.form', urlencode($code)) !!} </p>
-		<p>Thank you!</p>
+		<p>Pour changer votre mot de passe, <a href="{{ route('auth.password.reset.form', urlencode($code)) }}">Cliquez ici.</a></p>
+		<p>Ou bien rendez vous à cette adresse: <br /> {!! route('auth.password.reset.form', urlencode($code)) !!} </p>
+		<p>Merci!</p>
 	</body>
 </html>
