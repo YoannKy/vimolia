@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Input;
 use stdClass;
 use TBMsg;
 use Config;
+use Mail;
 use Session;
 
 class ConvController extends Controller
@@ -90,12 +91,28 @@ class ConvController extends Controller
 
     public function addMessage(Request $request, $id)
     {
-        $conv = TBMsg::addMessageToConversation($id, Sentinel::getUser()->id, $request->input('message'));
+        TBMsg::addMessageToConversation($id, Sentinel::getUser()->id, $request->input('message'));
         if (Sentinel::inRole('user')) {
             Conv::setConvAttribute($id, 'public', $request->has('public'));
         }
+        if (Sentinel::inRole('expert')) {
+            Conv::removeOtherExperts($id);
+        }
         Conv::setConvAttribute($id, 'title', $request->get('title'));
         Conv::setConvAttribute($id, 'video', $request->get('video'));
+
+        $emails = Conv::getReceiver($id);
+        $conv = Conv::find($id);
+        foreach ($emails  as $email) {
+            Mail::send(
+                'convs.email.new',
+                ['email' => $email, 'subject' => $conv->title, 'convId' => $conv->id],
+                function ($message) use ($email) {
+                        $message->to($email)
+                            ->subject('Vous avez reçu un nouveau message');
+                }
+            );
+        }
         return redirect(route('convs.show', ['id' => $id]));
     }
 

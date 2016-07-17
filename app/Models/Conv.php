@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Sentinel;
+use App\Models\User;
 
 class Conv extends Model
 {
@@ -40,6 +41,29 @@ class Conv extends Model
 
     public static function getPublicConvs()
     {
-        return Conv::where('public',1)->where('closed',1)->get();
+        return Conv::where('public', 1)->where('closed', 1)->get();
+    }
+
+    public static function removeOtherExperts($id)
+    {
+        $conv = Conv::find($id);
+        foreach ($conv->users as $user) {
+            if (Sentinel::findById($user->id)->inRole('expert') && $user->id != Sentinel::getUser()->id) {
+                $conv->users()->detach($user);
+            }
+        }
+        $conv->save();
+    }
+
+    public static function getReceiver($id)
+    {
+        $receiver = [];
+        $conv = Conv::find($id);
+        foreach ($conv->users as $user) {
+            if ($user->id != Sentinel::getUser()->id) {
+                array_push($receiver, $user->email);
+            }
+        }
+        return $receiver;
     }
 }

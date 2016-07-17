@@ -116,7 +116,7 @@ class UserController extends Controller
                 ['code' => $code, 'email' => $email],
                 function ($message) use ($email) {
                     $message->to($email)
-                        ->subject('Your account has been created');
+                        ->subject('Votre compte à été crée');
                 }
             );
         }

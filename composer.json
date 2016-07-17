@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "srlabs/centaur": "dev-master",
         "tzookb/tbmsg": "2.0.*",
-        "laravelcollective/html": "5.2.x-dev"
+        "laravelcollective/html": "5.2.x-dev",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
