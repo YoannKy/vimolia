@@ -201,7 +201,7 @@
     @if(Sentinel::inRole('user') && 
         count($messages)==2 &&
         $conv->closed == 0  && 
-        ($conv->satisfied == 0   || $conv->further ==0 ))
+        ($conv->satisfied == 0   && $conv->further ==0 ))
         {{ Form::open(array('route' => ['convs.close',$conv->id])) }}
             {{Form::hidden('satisfied',0 )}}
             {{Form::hidden('expertId', $expertId)}}

@@ -40,6 +40,7 @@ class ConvController extends Controller
             $conv->participant = User::getParticipants($participants);
             $conv->title = $convTmp->title;
             $conv->satisfied = $convTmp->satisfied;
+            $conv->further = $convTmp->further;
         }
         return view('convs.index', ['convs' => $convs]);
     }
@@ -94,13 +95,13 @@ class ConvController extends Controller
         TBMsg::addMessageToConversation($id, Sentinel::getUser()->id, $request->input('message'));
         if (Sentinel::inRole('user')) {
             Conv::setConvAttribute($id, 'public', $request->has('public'));
+            Conv::setConvAttribute($id, 'title', $request->get('title'));
+            Conv::setConvAttribute($id, 'video', $request->get('video'));
         }
         if (Sentinel::inRole('expert')) {
             Conv::removeOtherExperts($id);
         }
-        Conv::setConvAttribute($id, 'title', $request->get('title'));
-        Conv::setConvAttribute($id, 'video', $request->get('video'));
-
+       
         $emails = Conv::getReceiver($id);
         $conv = Conv::find($id);
         foreach ($emails  as $email) {
