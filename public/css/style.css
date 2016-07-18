@@ -297,11 +297,46 @@ section .WelcomeMsg{
         }
 }
 
-/**** PAGE CHAT ****/
+/**** QUESTION ****/
 .question{
     margin: 0;
     padding: 0;
+    background: white;
 }
+.question p.questionPosee{
+    margin: 0;
+    padding: 10px;
+}
+.question p.questionPosee span{
+    font-weight: bold;
+}
+.question p.date{
+    margin: 0;
+    padding: 10px;
+    border-top: 1px solid silver;
+}
+.question p.date span{
+    font-weight: bold;
+}
+
+/**** REPONSE ****/
+.reponse{
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+.reponse p.reponseAPoser, .reponse p.reponseParDefautAPoser, .reponse p.reponsePosee{
+    margin: 0;
+    padding: 10px;
+}
+.reponse p.reponsePosee span{
+    font-weight: bold;
+}
+.reponse p.questionPublique{
+    padding: 10px;
+}
+
+/* ? */
 .question .avatar{
     margin: 0;
 }
@@ -324,10 +359,8 @@ section .WelcomeMsg{
     border: 2px solid silver;
     padding: 10px 8px 10px 8px;
 }
-.reponse{
-    margin: 0;
-    padding: 0;
-}
+
+
 .reponse .avatar{
     margin: 0;
 }

@@ -104,7 +104,7 @@ class ConvController extends Controller
        
         $emails = Conv::getReceiver($id);
         $conv = Conv::find($id);
-        foreach ($emails  as $email) {
+        /*foreach ($emails  as $email) {
             Mail::send(
                 'convs.email.new',
                 ['email' => $email, 'subject' => $conv->title, 'convId' => $conv->id],
@@ -113,7 +113,7 @@ class ConvController extends Controller
                             ->subject('Vous avez reçu un nouveau message');
                 }
             );
-        }
+        }*/
         return redirect(route('convs.show', ['id' => $id]));
     }
 

@@ -25,6 +25,49 @@ Note :{{$note}}
     <br>
 @endforeach
 </div>
+<div class="row">
+        <div class="starter-template">
+            <h1>Mon profil</h1>
+            <p class="lead">Consulter vos informations</p>
+        </div>
+        <div id="patricien">
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="#">Mes conversations <span class="badge">3</span></a></li>
+                <li role="presentation"><a href="#">Historique <span class="badge">4</span></a></li>
+            </ul>
+            <br>
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <center>
+                            <h3>{{$user->first_name}} {{$user->last_name}}</h3>
+                            <img src="/images/photo.png" alt="photo praticien">
+                            <div class="caption">
+                                <p>Spécialité</p>
+                                <p>
+                                    <!--<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                    <span>(50)</span>-->
+                                    Note :{{$note}}
+                                </p>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-8">
+                    <div class="jumbotron thumbnail">
+                        <h2>Mes informations personnelles</h2>
+                        <p><i>Je me situe au : 5 rue du Cabinet</i></p>
+                        <p>Compétence 1 : </p>
+                        <p>Compétence 2 : </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 @if ($isFind && !$isNoted))
 <p>Notez le practicien :</p>
 {{ Form::open(array('route' => ['forms.doctors.note',$user->id])) }}
