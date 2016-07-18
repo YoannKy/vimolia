@@ -96,6 +96,11 @@ class RegistrationController extends Controller
         // Send the activation email
         $code = $result->activation->getCode();
         $email = $result->user->email;
+
+        $user = Sentinel::findById($result->user->id);
+        $role = Sentinel::findRoleByName('User');
+        $role->users()->attach($user);
+
         Mail::queue(
             'centaur.email.welcome',
             ['code' => $code, 'email' => $email],
@@ -177,6 +182,11 @@ class RegistrationController extends Controller
         // Send the activation email
         $code = $result->activation->getCode();
         $email = $result->user->email;
+
+        $user = Sentinel::findById($result->user->id);
+        $role = Sentinel::findRoleByName('Praticien');
+        $role->users()->attach($user);
+
         Mail::queue(
             'centaur.email.welcome',
             ['code' => $code, 'email' => $email],

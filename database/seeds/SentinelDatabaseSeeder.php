@@ -92,8 +92,8 @@ class SentinelDatabaseSeeder extends Seeder
             'permissions' => array()
         ));
         $docRole = Sentinel::getRoleRepository()->create(array(
-            'name' => 'Practicien',
-            'slug' => 'practicien',
+            'name' => 'Praticien',
+            'slug' => 'praticien',
             'permissions' => array(
                 'users.update' => true,
                 'users.view' => true,

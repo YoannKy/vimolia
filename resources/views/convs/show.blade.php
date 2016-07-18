@@ -1,7 +1,7 @@
 @extends('Centaur::layout')
 @section('title', 'Messages')
 @section('content')
-@if((Sentinel::inRole('expert') && count($messages) ==0 )|| (Sentinel::inRole('practicien')))
+@if((Sentinel::inRole('expert') && count($messages) ==0 )|| (Sentinel::inRole('praticien')))
     {{ Form::open(array('route' => ['convs.addMessage',$conv->id])) }}
         {{Form::text('message',null,array('required'=>'required'))}}
         {{Form::hidden('id_conv', $conv->id)}}

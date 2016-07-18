@@ -56,7 +56,7 @@
                                      <li><a href="{{ route('convs.create') }}">Poser une question</a></li>
                                      <li><a href="{{ route('forms.list') }}">Formulaires</a></li>
                                      @elseif(Sentinel::inRole('expert'))
-                                     <li><a href="{{ route('forms.index') }}">Demandes avec un practicien</a></li>
+                                     <li><a href="{{ route('forms.index') }}">Demandes avec un praticien</a></li>
                                      @endif
                                 @endif
                             </ul>

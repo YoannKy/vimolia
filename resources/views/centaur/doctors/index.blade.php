@@ -1,5 +1,5 @@
 @extends('Centaur::layout')
-@section('title', 'liste des practiciens')
+@section('title', 'liste des praticiens')
 
 @section('content')
 

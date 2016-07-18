@@ -53,7 +53,7 @@ class User extends EloquentUser
             return User::whereIn('doctors', $filter)->get();
         }
         return User::whereHas('roles', function ($query) {
-            $query->where('roles.slug', 'like', '%practicien%');
+            $query->where('roles.slug', 'like', '%praticien%');
         })->get();
     }
 

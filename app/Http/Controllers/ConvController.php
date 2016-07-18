@@ -125,7 +125,7 @@ class ConvController extends Controller
      */
     public function create($id = null)
     {
-        if ($id != null && (Sentinel::inRole('expert') || Sentinel::inRole('practicien'))) {
+        if ($id != null && (Sentinel::inRole('expert') || Sentinel::inRole('praticien'))) {
             $conv = TBMsg::createConversation(
                 array(
                     Sentinel::getUser()->id,
