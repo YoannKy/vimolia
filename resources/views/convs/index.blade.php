@@ -5,14 +5,16 @@
 <h2>Liste de vos conversations</h2>
 <div class="list-group">
 @foreach($convs as $index => $conv)
-   <div class="conversation list-group-item @if($conv->satisfied) list-group-item-success @endif">
+   <div class="conversation list-group-item @if($conv->satisfied) list-group-item-success @elseif($conv->further) list-group-item-danger  @endif">
     Sujet : {{ $conv->title }}
     <br>
-    De : {{$conv->participant->first_name}} {{$conv->participant->last_name}}
+    Dernier message de : {{$conv->participant->first_name}} {{$conv->participant->last_name}}
     <br>
     @if($conv->satisfied)
     Statut : Répondu
-    @else 
+    @elseif ($conv->further)
+    Statut: Répondu mais non satisfait
+    @else
     Statut : En attente
     @endif
     <br><br>

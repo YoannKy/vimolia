@@ -103,6 +103,7 @@ class FormController extends Controller
 
     public function addDoctors(Request $request, $id)
     {
+        dd($request->input('doctors'));
         Form::addDoctors(serialize($request->input('doctors')), $id);
         return redirect()->back();
     }
