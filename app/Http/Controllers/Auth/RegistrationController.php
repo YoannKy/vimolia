@@ -10,6 +10,7 @@ use App\Http\Requests;
 use Centaur\AuthManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Storage;
 
 class RegistrationController extends Controller
 {
@@ -37,6 +38,16 @@ class RegistrationController extends Controller
     }
 
     /**
+     * Show the registration of doctor form
+     * @return View
+     */
+    public function getDoctorRegister
+    ()
+    {
+        return view('Centaur::auth.doctorRegister');
+    }
+
+    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
@@ -48,13 +59,22 @@ class RegistrationController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
-            'date_of_birth' => 'required',
-            'phone_number' => 'required',
+            'date_of_birth' => 'required|date',
+            'phone_number' => 'required|regex:/[0-9]{10}/',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6'
+            'password' => 'required|confirmed|min:6',
+            'avatar' => 'mimes:jpeg,bmp,png,jpg',
         ]);
 
+
+        $imageName = uniqid(). '.' .$request->file('avatar_user')->getClientOriginalExtension();
+
+        $request->file('avatar_user')->move(
+            base_path() . '/public/images/avatar/', $imageName
+        );
+
         // Assemble registration credentials
+
         $credentials = [
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
@@ -62,7 +82,8 @@ class RegistrationController extends Controller
             'date_of_birth' => $request->get('date_of_birth'),
             'phone_number' => $request->get('phone_number'),
             'email' => trim($request->get('email')),
-            'password' => $request->get('password')
+            'password' => $request->get('password'),
+            'avatar' => $imageName
         ];
 
         // Attempt the registration
@@ -94,6 +115,86 @@ class RegistrationController extends Controller
         return $result->dispatch(route('home'));
     }
 
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return Response|Redirect
+     */
+    protected function postDoctorRegister(Request $request)
+    {
+        $result = $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'date_of_birth' => 'required|date',
+            'phone_number' => 'required|regex:/[0-9]{10}/',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+            'avatar' => 'mimes:jpeg,bmp,png,jpg',
+            'profession' => 'required',
+            'siret' => 'required',
+            'degree' => 'required',
+            'how_did_you_know' => 'max:255'
+        ]);
+
+        $imageName = uniqid(). '.' .$request->file('avatar')->getClientOriginalExtension();
+
+        $request->file('avatar')->move(
+            base_path() . '/public/images/avatar/', $imageName
+        );
+
+        $degree = uniqid(). '.' .$request->file('degree')->getClientOriginalExtension();
+
+        $request->file('degree')->move(
+            base_path() . '/public/degree/', $degree
+        );
+        // Assemble registration credentials
+
+        $credentials = [
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'address' => $request->get('address'),
+            'date_of_birth' => $request->get('date_of_birth'),
+            'phone_number' => $request->get('phone_number'),
+            'email' => trim($request->get('email')),
+            'password' => $request->get('password'),
+            'avatar' =>  $imageName,
+            'profession' => $request->get('profession'),
+            'siret' => $request->get('siret'),
+            'degree' => $degree,
+            'how_did_you_know' => $request->get('how_did_you_know'),
+        ];
+
+        // Attempt the registration
+        $result = $this->authManager->register($credentials);
+
+        if ($result->isFailure()) {
+            Storage::Delete(base_path() . '/public/images/catalog/', $imageName);
+            return $result->dispatch();
+        }
+
+        // Send the activation email
+        $code = $result->activation->getCode();
+        $email = $result->user->email;
+        Mail::queue(
+            'centaur.email.welcome',
+            ['code' => $code, 'email' => $email],
+            function ($message) use ($email) {
+                $message->to($email)
+                    ->subject('Your account has been created');
+            }
+        );
+
+        // Ask the user to check their email for the activation link
+        $result->setMessage('Registration complete.  Please check your email for activation instructions.');
+
+        // There is no need to send the payload data to the end user
+        $result->clearPayload();
+
+        // Return the appropriate response
+        return $result->dispatch(route('home'));
+    }
     /**
      * Activate a user if they have provided the correct code
      * @param  string $code
