@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\ConvController;
 use App\Models\Form;
+use App\Models\Conv;
 use Carbon\Carbon;
 use Mail;
 use Sentinel;
+use TBMsg;
 use App\Http\Requests;
 use Centaur\AuthManager;
 use App\Models\User;
@@ -148,11 +151,28 @@ class UserController extends Controller
 
     public function profile($id)
     {
-        $user = User::getUser($id);
+        $user = Sentinel::getUser();
         $isFind = Form::isFind($id);
         $isNoted = Form::isNoted($id);
         $note = User::getNote($id);
-        return view('Centaur::users.profile', ['user' => $user, 'isFind' => $isFind, 'isNoted' => $isNoted, 'note' => $note]);
+        $convs = TBMsg::getUserConversations(Sentinel::getUser()->id);
+
+        $participants = [];
+        $finalParticipants = [];
+        $convTmp = "";
+        foreach ($convs as $index => $conv) {
+            $convTmp = Conv::find($conv->getId());
+            if($convTmp->public && $convTmp->satisfied) {
+                $participants = $this->getUniqueParticipants($participants, $conv->getAllParticipants());
+                $conv->participant = User::getParticipants($participants);
+                $conv->title = $convTmp->title;
+                $conv->satisfied = $convTmp->satisfied;
+                $conv->further = $convTmp->further;
+            } else {
+                unset($convs[$index]);
+            }
+        }
+        return view('Centaur::users.profile', ['user' => $user, 'isFind' => $isFind, 'isNoted' => $isNoted, 'note' => $note, 'convs' =>$convs]);
     }
 
     /**
@@ -278,4 +298,12 @@ class UserController extends Controller
             ->with(['patients' => $patients, 'toto' => Sentinel::getUser()->id]);
     }
 
+    protected  function getUniqueParticipants($aUniqueParticipant, $aPartcipant)
+    {
+        $aUniqueParticipant = array_merge($aUniqueParticipant, $aPartcipant);
+        //making sure each user appears only once
+        $aUniqueParticipant = array_unique($aUniqueParticipant);
+
+        return $aUniqueParticipant;
+    }
 }
