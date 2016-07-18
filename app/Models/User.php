@@ -30,11 +30,6 @@ class User extends EloquentUser
         return User::whereIn('id', $aId)->where('id', '!=', Sentinel::getUser()->id)->first();
     }
 
-
-    public static function getUser($id)
-    {
-        return User::find($id);
-    }
     public static function listDoctors($filter = null)
     {
         if ($filter) {
