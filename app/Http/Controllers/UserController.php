@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Form;
 use Carbon\Carbon;
 use Mail;
 use Sentinel;
@@ -145,30 +146,13 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    /**
-     * Show the form for editing the specified user.
-     *
-     * @param  string  $hash
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function profile($id)
     {
-        // Fetch the user object
-        // $id = $this->decode($hash);
-        $user = $this->userRepository->findById($id);
-
-        // Fetch the available roles
-        $roles = app()->make('sentinel.roles')->createModel()->all();
-
-        if ($user) {
-            return view('Centaur::users.edit', [
-                'user' => $user,
-                'roles' => $roles
-            ]);
-        }
-
-        session()->flash('error', 'Invalid user.');
-        return redirect()->back();
+        $user = User::getUser($id);
+        $isFind = Form::isFind($id);
+        $isNoted = Form::isNoted($id);
+        $note = User::getNote($id);
+        return view('Centaur::users.profile', ['user' => $user, 'isFind' => $isFind, 'isNoted' => $isNoted, 'note' => $note]);
     }
 
     /**
@@ -285,4 +269,13 @@ class UserController extends Controller
         return view('Centaur::experts.index')
                 ->with('experts', $experts);
     }
+
+    public function patients()
+    {
+        $patients = User::listPatients();
+
+        return view('patients.index')
+            ->with(['patients' => $patients, 'toto' => Sentinel::getUser()->id]);
+    }
+
 }

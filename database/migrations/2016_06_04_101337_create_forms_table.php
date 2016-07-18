@@ -26,6 +26,8 @@ class CreateFormsTable extends Migration
             $table->string('symptom')->nullable();
             $table->string('info')->nullable();
             $table->string('health_record')->nullable();
+            $table->boolean('has_consultation')->nullable();
+            $table->integer('choose')->nullable();
             $table->timestamps();
         });
     }

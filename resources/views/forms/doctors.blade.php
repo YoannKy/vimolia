@@ -16,10 +16,17 @@
 	{{ Form::close()}}
 @else
 	<h2>Liste des médecins proposés par l'expert</h2>
+	<h3>
+		Vous pouvez prendre contact avec un des medecins proposés puis sélectionner celui avec qui vous avez pris le rendez-vous
+	</h3>
+	{{ Form::open(array('route' => ['forms.doctors.choose',$formId])) }}
 	@foreach($doctors as $index => $doctor)	
 		{{$doctor->first_name}}
 		{{$doctor->last_name}}
+		{{ Form::radio('doctor', $doctor->id )}}
 		<br>
-	@endforeach	
+	@endforeach
+		{{ Form::submit('valider')}}
+	{{ Form::close()}}
 @endif
 @stop

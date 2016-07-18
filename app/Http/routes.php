@@ -48,7 +48,7 @@
 
         // Users
         Route::resource('users', 'UserController');
-
+        Route::get('profile/{id}', ['as' => 'users.profile', 'uses' => 'UserController@profile']);
         // Roles
         Route::resource('roles', 'RoleController');
 
@@ -74,6 +74,14 @@
         Route::get('forms{id}/doctors', ['as' => 'forms.doctors.list', 'uses' => 'FormController@doctors']);
         
         Route::post('forms/{id}/addDoctors', ['as' => 'forms.doctors.add', 'uses' => 'FormController@addDoctors']);
+
+        Route::post('forms/{id}/chooseDoctor', ['as' => 'forms.doctors.choose', 'uses' => 'FormController@chooseDoctor']);
+
+        Route::post('forms/{id}/note', ['as' => 'forms.doctors.note', 'uses' => 'FormController@noteDoctor']);
+
+        Route::post('patients/{id}/addPatient', ['as' => 'forms.patients.add', 'uses' => 'FormController@addPatient']);
+
+        Route::get('patients', ['as' => 'users.patients', 'uses' => 'UserController@patients']);
 
         Route::get('doctors/list', ['as' => 'users.doctor.list', 'uses' => 'UserController@doctors']);
 
