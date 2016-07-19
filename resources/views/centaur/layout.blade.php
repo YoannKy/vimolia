@@ -45,17 +45,22 @@
                     <div class="container">
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                @if (Sentinel::check() && Sentinel::inRole('administrateur'))
-                                    <li class="{{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Utilisateurs</a></li>
-                                    <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
-                                    <li class="{{ Request::is('forms*') ? 'active' : '' }}"><a href="{{ route('forms.index') }}">Roles</a></li>
-                                @elseif(Sentinel::check())
+                                @if (Sentinel::check())
+                                    @if(Sentinel::inRole('administrateur'))
+                                        <li class="{{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Utilisateurs</a></li>
+                                        <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
+                                    @endif
                                      <li><a href="{{ route('convs.index') }}">Messages({{$unread}})</a></li>
                                      <li><a href="{{ route('convs.public') }}">Questions publiques</a></li>
                                      @if(Sentinel::inRole('user'))
-                                     <li><a href="{{ route('convs.create') }}">Poser une question</a></li>
-                                     <li><a href="{{ route('forms.list') }}">Formulaires</a></li>
-                                     @elseif(Sentinel::inRole('expert'))
+                                         <li><a href="{{ route('convs.create') }}">Poser une question</a></li>
+                                         <li><a href="{{ route('forms.list') }}">Formulaires</a></li>
+                                     @elseif(Sentinel::inRole('praticien'))
+                                        <li><a href="{{ route('users.expert.list') }}">Contacter  un expert</a></li>
+                                     @elseif(Sentinel::inRole('expert') || Sentinel::inRole('administrateur'))
+                                        @if(Sentinel::inRole('expert'))
+                                         <li><a href="{{ route('users.doctor.list') }}">Contacter  un praticien</a></li>
+                                        @endif
                                      <li><a href="{{ route('forms.index') }}">Demandes avec un praticien</a></li>
                                      @endif
                                 @endif

@@ -55,6 +55,8 @@
                 {{ Form::close() }}
             </div>
         </div>
+        
+    {!! link_to(route('auth.doctor.register.form'),'s\'inscrire en tant que médecin') !!}
     </div>
 </div>
 @stop
