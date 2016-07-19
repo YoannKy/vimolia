@@ -28,7 +28,7 @@
      // Registration
     Route::get('register', ['as' => 'auth.register.form', 'uses' => 'Auth\RegistrationController@getRegister']);
     Route::post('register', ['as' => 'auth.register.attempt', 'uses' => 'Auth\RegistrationController@postRegister']);
-
+    Route::get('registerchoice', ['as' => 'auth.register.choose', 'uses' => 'Auth\RegistrationController@getRegisterChoice']);    
      // Activation
     Route::get('activate/{code}', ['as' => 'auth.activation.attempt', 'uses' => 'Auth\RegistrationController@getActivate']);
     Route::get('resend', ['as' => 'auth.activation.request', 'uses' => 'Auth\RegistrationController@getResend']);

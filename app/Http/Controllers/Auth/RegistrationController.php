@@ -36,6 +36,10 @@ class RegistrationController extends Controller
         return view('Centaur::auth.register');
     }
 
+    public function getRegisterChoice()
+    {
+        return view('Centaur::auth.registerChoice');
+    }
     /**
      * Create a new user instance after a valid registration.
      *

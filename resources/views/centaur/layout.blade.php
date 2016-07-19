@@ -43,7 +43,7 @@
                     <!--<a class="navbar-brand" href="/">Vimolia</a>-->
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="navbar navbar-custom     navbar-fixed-top">
+                <div class="navbar navbar-custom navbar-fixed-top">
                     <div class="container">
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
@@ -64,11 +64,11 @@
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 @if (Sentinel::check())
-                                    <li><p class="navbar-text">{{ Sentinel::getUser()->email }}</p></li>
+                                    <li><a href="{{route('users.profile',Sentinel::getUser()->id)}}">Mon profil</a></li>
                                     <li><a href="{{ route('auth.logout') }}">Déconnexion</a></li>
                                 @else
                                     <li><a href="{{ route('auth.login.form') }}">Connexion</a></li>
-                                    <li><a href="{{ route('auth.register.form') }}">Inscription</a></li>
+                                    <li><a href="{{ route('auth.register.choose') }}">Inscription</a></li>
                                 @endif
                             </ul>
                         </div><!-- /.navbar-collapse -->

@@ -144,7 +144,7 @@
                 </script>
                     {{Form::submit('Je valide ma réponse')}}
                     </p>
-                
+                </div>
             @else
                 @if(Sentinel::inRole('user'))
                 <p class="questionPublique">
@@ -195,9 +195,10 @@
                         $expertId = $message->senderId;
                     }
                 ?>
-                </p>
-            </div>
-                La réponse de l'expert est :
+                    </p>
+                </div>
+                <div class="reponseExpert">
+                    <p class="reponsePoseeExpert"><span>La réponse de l'expert est :</span><br>
             @endif
                         {{$message->content}}
                     </p>
