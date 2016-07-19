@@ -6,15 +6,10 @@
 
 <div class="row">
         <div class="starter-template">
-            <h2>Mon profil</h2>
+            <h1>Mon profil</h1>
             <p class="lead">Consulter vos informations</p>
         </div>
-        <div id="pratricien">
-            <ul class="nav nav-tabs">
-                <li role="presentation"><a href="#">Mes conversations <span class="badge">3</span></a></li>
-                <li role="presentation"><a href="#">Historique <span class="badge">4</span></a></li>
-            </ul>
-            <br>
+        <div id="praticien">
             <div class="row">
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
@@ -39,10 +34,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-    <h2>Liste de ses conversations</h2>
+    <h2>Liste de mes conversations</h2>
 <div class="list-group">
 @foreach($convs as $index => $conv)
    <div class="conversation list-group-item @if($conv->satisfied) list-group-item-success @elseif($conv->further) list-group-item-danger  @endif">

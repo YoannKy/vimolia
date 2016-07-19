@@ -196,9 +196,9 @@
                     }
                 ?>
                     </p>
-                </div>
-                <div class="reponseExpert">
-                    <p class="reponsePoseeExpert"><span>La réponse de l'expert est :</span><br>
+                
+                <div class="reponse">
+                    <p class="reponsePosee"><span>La réponse de l'expert est :</span><br>
             @endif
                         {{$message->content}}
                     </p>

@@ -52,7 +52,7 @@
                                     <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
                                     <li class="{{ Request::is('forms*') ? 'active' : '' }}"><a href="{{ route('forms.index') }}">Roles</a></li>
                                 @elseif(Sentinel::check())
-                                     <li><a href="{{ route('convs.index') }}">Messages({{$unread}})</a></li>
+                                     <li><a href="{{ route('convs.index') }}">Messages ({{$unread}})</a></li>
                                      <li><a href="{{ route('convs.public') }}">Questions publiques</a></li>
                                      @if(Sentinel::inRole('user'))
                                      <li><a href="{{ route('convs.create') }}">Poser une question</a></li>
@@ -64,7 +64,7 @@
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 @if (Sentinel::check())
-                                    <li><a href="{{route('users.profile',Sentinel::getUser()->id)}}">Mon profil</a></li>
+                                    <li><a href="{{route('users.profile',Sentinel::getUser()->id)}}">{{Sentinel::getUser()->first_name}} {{Sentinel::getUser()->last_name}}</a></li>
                                     <li><a href="{{ route('auth.logout') }}">Déconnexion</a></li>
                                 @else
                                     <li><a href="{{ route('auth.login.form') }}">Connexion</a></li>
