@@ -257,8 +257,12 @@ h2, h3{
     padding: 10px;
     border-bottom: 2px solid #85195c;
 }
-p.sous-titre, p.reponse, p.question, p.date{
+p.reponse, p.question, p.date{
     padding: 10px;
+}
+p.sous-titre{
+    padding: 10px;
+    font-size: 18px;
 }
 
 /**** PAGE CONVERSATION ****/
@@ -279,6 +283,26 @@ p.sous-titre, p.reponse, p.question, p.date{
 }
 .sujet p.sujetPose span{
     font-weight: bold;
+}
+
+/**** FORMULAIRE DETAILS ****/
+.formulaireDetails{
+    margin: 15px;
+}
+.formulaireDetails p span{
+    font-weight: bold;
+}
+
+/**** LISTE MEDECIN ****/
+.listeMedecin{
+    margin: 15px;
+}
+
+/**** PRISE DE CONTACT PRATICIEN ****/
+.demandePriseContact{
+    margin: 15px;
+    padding: 15px;
+    background: white;
 }
 
 /*timeline*/
