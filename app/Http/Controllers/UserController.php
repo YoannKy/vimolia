@@ -151,6 +151,14 @@ class UserController extends Controller
 
     public function profile($id)
     {
+        $user = Sentinel::findById($id);
+        if (!Sentinel::getUser()->inRole('administrateur') && !Sentinel::getUser()->inRole('expert') && ($user->inRole('administrateur') || $user->inRole('expert'))) {
+                return redirect()->route('home');
+        } else {
+            if(Sentinel::getUser()->inRole('expert') &&  $user->inRole('administrateur')) {
+                return redirect()->route('home');
+            }
+        }
         $user = Sentinel::getUser();
         $isFind = Form::isFind($id);
         $isNoted = Form::isNoted($id);
