@@ -25,6 +25,11 @@ class User extends EloquentUser
         'how_did_you_know'
     ];
 
+    public function skills()
+    {
+        return $this->belongsToMany('App\Models\Skill', 'skill_users', 'user_id', 'skill_id');
+    }
+
     public function convs()
     {
         return  $this->belongsToMany('App\Models\Conv', 'conv_users', 'user_id', 'conv_id');
@@ -49,8 +54,12 @@ class User extends EloquentUser
 
     public static function listDoctors($filter = null)
     {
+        return User::find(12)->skills()->get();
         if ($filter) {
-            return User::whereIn('doctors', $filter)->get();
+            return User::whereHas('roles', function ($query) {
+                $query->where('roles.slug', 'like', '%praticien%');
+            })->where('last_name', $filter)->get();
+
         }
         return User::whereHas('roles', function ($query) {
             $query->where('roles.slug', 'like', '%praticien%');

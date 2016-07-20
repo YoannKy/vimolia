@@ -10,6 +10,8 @@ class Skill extends Model
 {
     protected $table = 'skills';
 
+
+
     public static function addSkills(array $ids, $userId)
     {
         /*create a new form*/

@@ -90,6 +90,6 @@
 
         Route::get('doctors/list', ['as' => 'users.doctor.list', 'uses' => 'UserController@doctors']);
 
-         Route::get('experts/list', ['as' => 'users.expert.list', 'uses' => 'UserController@experts']);
+        Route::get('experts/list', ['as' => 'users.expert.list', 'uses' => 'UserController@experts']);
 
     });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\ConvController;
 use App\Models\Form;
 use App\Models\Conv;
+use App\Models\Skill;
 use Carbon\Carbon;
 use Mail;
 use Sentinel;
@@ -269,17 +270,17 @@ class UserController extends Controller
     }
 
    /**
-     * Get active experts (at least logged in 1 week ago)
+     * Get active doctors
      *
      * @param  none
      * @return \App\Model\User
      */
-    public function doctors()
+    public function doctors(Request $request)
     {
-        $doctors = User::listDoctors();
-
+        $doctors = User::listDoctors($request->get('last_name'));
+        $skills = Skill::all();
         return view('Centaur::doctors.index')
-                ->with('doctors', $doctors);
+                ->with(array('doctors' => $doctors, 'skills'=> $skills));
     }
 
     public function experts()
