@@ -2,13 +2,19 @@
 @section('title', 'liste des demandes')
 
 @section('content')
-{{$form->first_name}}
-{{$form->last_name}}
-{{$form->age}}
-{{$form->town}}
-{{$form->symptom}}
-{{$form->info}}
+
+<h2>Formulaire avec le détail</h2>
+<div class="formulaireDetails">
+	<p><span>Prénom :</span> {{$form->first_name}}</p>
+	<p><span>Nom :</span> {{$form->last_name}}</p>
+	<p><span>Age :</span> {{$form->age}}</p>
+	<p><span>Ville :</span> {{$form->town}}</p>
+	<p><span>Symptôme :</span> {{$form->symptom}}</p>
+	<p><span>Information :</span> {{$form->info}}</p>
+</div>
+<br><br>
+<h2>Mise en relation</h2>
 @if(Sentinel::inRole('expert'))
-	{!! link_to(route('forms.doctors.list',$form->id), 'mettre en relation') !!}
+	<button type="button" class="bouton">{!! link_to(route('forms.doctors.list',$form->id), 'Mettre en relation') !!}</button>
 @endif
 @stop

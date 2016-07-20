@@ -28,6 +28,11 @@
      // Registration
     Route::get('register', ['as' => 'auth.register.form', 'uses' => 'Auth\RegistrationController@getRegister']);
     Route::post('register', ['as' => 'auth.register.attempt', 'uses' => 'Auth\RegistrationController@postRegister']);
+    Route::get('registerchoice', ['as' => 'auth.register.choose', 'uses' => 'Auth\RegistrationController@getRegisterChoice']); 
+
+    // Doctor's registration
+    Route::get('register/doctor', ['as' => 'auth.doctor.register.form', 'uses' => 'Auth\RegistrationController@getDoctorRegister']);
+    Route::post('register/doctor', ['as' => 'auth.doctor.register.attempt', 'uses' => 'Auth\RegistrationController@postDoctorRegister']);
 
      // Activation
     Route::get('activate/{code}', ['as' => 'auth.activation.attempt', 'uses' => 'Auth\RegistrationController@getActivate']);

@@ -4,7 +4,7 @@
 @section('content')
 {{ Form::open(array('route' => ['forms.store'])) }}
     <div class="form-group">
-    {{ Form::label('fist_name', 'prénom')}}
+    {{ Form::label('fist_name', 'Prénom')}}
     {{ Form::text('first_name',null,array('required'=>'required', 'class'=>'form-control'))}}
     </div>
     <div class="form-group">
@@ -12,7 +12,7 @@
     {{ Form::text('last_name',null,array('required'=>'required','class'=>'form-control'))}}
     </div>
     <div class="form-group">
-    {{ Form::label('age', 'age')}}
+    {{ Form::label('age', 'Age')}}
     {{ Form::number('age',null,array('required'=>'required','class'=>'form-control'))}}
     </div>
     <div class="form-group">
@@ -20,7 +20,7 @@
     {{ Form::text('town',null,array('required'=>'required','class'=>'form-control'))}}
     </div>
     <div class="form-group">
-    {{ Form::label('symptom', 'Symptomes')}}
+    {{ Form::label('symptom', 'Symptômes')}}
     {{ Form::text('symptom',null,array('required'=>'required','class'=>'form-control'))}}
     </div>
     <div class="form-group">

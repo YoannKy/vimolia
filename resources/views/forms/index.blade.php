@@ -5,9 +5,12 @@
 <h2>Liste de demande de prises de contact avec un praticien</h2>
 @foreach($forms as $index => $form)
     <div class="list-group">
-	    <a class="lien" href="{{route('forms.show',$form->id)}}">
-	        Voir le formulaire
-	    </a>
+    	<div class="demandePriseContact">
+    		<span>Demande de prise de contact : </span>
+		    <button type="button" class="bouton">
+		    	<a class="lien" href="{{route('forms.show',$form->id)}}">Voir le formulaire</a>
+		    </button>
+	    </div>
 	</div>
 @endforeach
 @stop

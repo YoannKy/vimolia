@@ -1,4 +1,6 @@
-/**** CONFIG DE BASE ****/
+/*************************
+**** CONFIG DE BASE ******
+*************************/
 body {
     background: #e6e6e6;
 }
@@ -15,6 +17,45 @@ body {
 .col-lg-offset-6 {
     margin-left: 50%;
 }
+/**** NAVIGATION ****/
+nav .navbar-custom{
+    margin: 0;
+    background: #85195c;
+    color: white;
+}
+nav .navbar ul li{
+    text-transform: uppercase;
+}
+nav .navbar ul li.active, nav .navbar ul li:hover{
+    background: #70144c;
+    color: white!important;
+}
+.navbar-default .navbar-text{
+    color: white;
+}
+.navbar-default .navbar-nav> li > a, .navbar-default .navbar-nav> li > a:hover{
+    color: white;
+}
+/**** FORMULAIRE ****/
+form .btn-primary{
+    background: #85195c;
+    border: 1px solid #85195c;
+}
+form .btn-primary:hover{
+    background: #70144c;
+    border: 1px solid #70144c;
+}
+button a{
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+button a:hover, button a:focus{
+    color: white;
+    text-decoration: none;
+}
+
+/**** ACCUEIL - DASHBOARD ****/
 .container .AccueilMsg {
     color: black;
     border-radius: 0!important;
@@ -32,34 +73,6 @@ body {
     background: url('/images/bg.jpg') no-repeat;
     height: 500px;
     margin: 0;
-}
-nav .navbar-custom{
-    margin: 0;
-    background: #85195c;
-    color: white;
-}
-nav .navbar ul li{
-    text-transform: uppercase;
-}
-nav .navbar ul li.active, nav .navbar ul li:hover{
-    background: #70144c;
-    color: white!important;
-}
-
-/* SURCHARGE BOOTSTRAP */
-.navbar-default .navbar-text{
-    color: white;
-}
-.navbar-default .navbar-nav> li > a, .navbar-default .navbar-nav> li > a:hover{
-    color: white;
-}
-form .btn-primary{
-    background: #85195c;
-    border: 1px solid #85195c;
-}
-form .btn-primary:hover{
-    background: #70144c;
-    border: 1px solid #70144c;
 }
 section{
     margin: 0 0 50px 0;
@@ -83,8 +96,12 @@ section .WelcomeMsg{
 #blocPresentation .blocButton a{
     background: #85195c;
 }
-.skills{
+.fonctions{
     text-align: center;
+}
+.fonctions p{
+    margin: 10px 0 0 0;
+    font-weight: bold;
 }
 .btn-circle.btn-xl {
     width: 150px;
@@ -107,9 +124,201 @@ section .WelcomeMsg{
 .btn-circle.btn-xl i{
     color: white;
 }
-.skills p{
-    margin: 10px 0 0 0;
+
+/**** QUESTION ****/
+.question{
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+.question p.questionPosee{
+    margin: 0;
+    padding: 10px;
+}
+.question p.questionPosee span{
     font-weight: bold;
+}
+.question p.date{
+    margin: 0;
+    padding: 10px;
+    border-top: 1px solid silver;
+}
+.question p.date span{
+    font-weight: bold;
+}
+.questionPatient{
+    margin: 0;
+    padding: 15px;
+    background: white;
+}
+
+/**** REPONSE ****/
+.reponse{
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+.reponse p.reponseAPoser, .reponse p.reponseParDefautAPoser, .reponse p.reponsePosee{
+    margin: 0;
+    padding: 10px;
+}
+.reponse p.reponsePosee span{
+    font-weight: bold;
+}
+.reponse p.date{
+    margin: 0;
+    padding: 10px;
+    border-top: 1px solid silver;
+}
+.reponse p.date span{
+    font-weight: bold;
+}
+.reponse p.questionPublique{
+    padding: 10px;
+}
+
+/* ? */
+/*.question .avatar{
+    margin: 0;
+}
+.question .avatar img{
+    border: 2px solid silver;
+}
+.question .message textarea{
+    width: 100%;
+    height: 130px;
+    padding: 5px;
+    border: 2px solid silver;
+}
+.question .message span{
+    font-style: italic;
+    float: right;
+}
+.question .message button{
+    float: right;
+    background: white;
+    border: 2px solid silver;
+    padding: 10px 8px 10px 8px;
+}*/
+
+
+.reponse .avatar{
+    margin: 0;
+}
+.reponse .avatar img{
+    border: 2px solid silver;
+}
+.reponse .message div p{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    border: 2px solid silver;
+    text-align: justify;
+}
+.reponse .message span{
+    font-style: italic;
+    float: right;
+}
+.reponse .message button{
+    float: right;
+    background: white;
+    border: 2px solid silver;
+    padding: 10px 8px 10px 8px;
+}
+.utilisateur{
+    margin: 70px 0 0 0;
+}
+.utilisateur .avatar img{
+    width: 80px;
+    border: 2px solid silver;
+}
+.utilisateur .nom{
+    margin: 0 0 0 -30px;
+}
+.menuProfil ul{
+    background-color: silver;
+}
+.menuProfil ul li.hover{
+    background: #4c4c4c;
+}
+.menuProfil .boutonDetails{
+    margin: 0 0 0 0;
+}
+
+/**** PAGE LISTE PRATICIENS ****/
+#praticien{
+    margin: 15px;
+}
+#praticien h3{
+    text-align: center;
+}
+
+/**** PATIENT : PAGE POSER UNE QUESTION ****/
+input[type=submit]{
+    background: #85195c;
+    color: white;
+    border-radius: 4px;
+    border: 1px solid silver;
+    margin: 10px 0 0 0;
+    padding: 8px;
+    font-size: 18px;
+}
+
+/**** PAGE RESULTAT QUESTION ****/
+h2, h3{
+    background: white;
+    padding: 10px;
+    border-bottom: 2px solid #85195c;
+}
+p.reponse, p.question, p.date{
+    padding: 10px;
+}
+p.sous-titre{
+    padding: 10px;
+    font-size: 18px;
+}
+
+/**** PAGE CONVERSATION ****/
+.conversation{
+    border: 1px solid #85195c;
+}
+.bouton{
+    background: #85195c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+/**** QUESTION PUBLIQUE ****/
+.sujet p.sujetPose{
+    font-size: 18px;
+}
+.sujet p.sujetPose span{
+    font-weight: bold;
+}
+
+/**** FORMULAIRE DETAILS ****/
+.formulaireDetails{
+    margin: 15px;
+}
+.formulaireDetails p span{
+    font-weight: bold;
+}
+
+/**** LISTE MEDECIN ****/
+.listeMedecin{
+    margin: 15px;
+}
+
+/**** PRISE DE CONTACT PRATICIEN ****/
+.demandePriseContact{
+    margin: 15px;
+    padding: 15px;
+    background: white;
+}
+.validationChoixMedecin{
+    margin: 0;
 }
 
 /*timeline*/
@@ -295,122 +504,6 @@ section .WelcomeMsg{
             left: -14px;
             right: auto;
         }
-}
-
-/**** PAGE CHAT ****/
-.question{
-    margin: 0;
-    padding: 0;
-}
-.question .avatar{
-    margin: 0;
-}
-.question .avatar img{
-    border: 2px solid silver;
-}
-.question .message textarea{
-    width: 100%;
-    height: 130px;
-    padding: 5px;
-    border: 2px solid silver;
-}
-.question .message span{
-    font-style: italic;
-    float: right;
-}
-.question .message button{
-    float: right;
-    background: white;
-    border: 2px solid silver;
-    padding: 10px 8px 10px 8px;
-}
-.reponse{
-    margin: 0;
-    padding: 0;
-}
-.reponse .avatar{
-    margin: 0;
-}
-.reponse .avatar img{
-    border: 2px solid silver;
-}
-.reponse .message div p{
-    width: 100%;
-    height: auto;
-    padding: 5px;
-    border: 2px solid silver;
-    text-align: justify;
-}
-.reponse .message span{
-    font-style: italic;
-    float: right;
-}
-.reponse .message button{
-    float: right;
-    background: white;
-    border: 2px solid silver;
-    padding: 10px 8px 10px 8px;
-}
-.utilisateur{
-    margin: 70px 0 0 0;
-}
-.utilisateur .avatar img{
-    width: 80px;
-    border: 2px solid silver;
-}
-.utilisateur .nom{
-    margin: 0 0 0 -30px;
-}
-.menuProfil ul{
-    background-color: silver;
-}
-.menuProfil ul li.hover{
-    background: #4c4c4c;
-}
-.menuProfil .boutonDetails{
-    margin: 0 0 0 0;
-}
-
-/**** PAGE LISTE PRATICIENS ****/
-#patricien ul{
-    padding: 0 12px 0 12px;
-}
-#praticien h3{
-    text-align: center;
-}
-
-/**** PATIENT : PAGE POSER UNE QUESTION ****/
-input[type=submit]{
-    background: #85195c;
-    color: white;
-    border-radius: 4px;
-    border: 1px solid silver;
-    margin: 10px 0 0 0;
-    padding: 8px;
-    font-size: 18px;
-}
-
-/**** PAGE RESULTAT QUESTION ****/
-h2, h3{
-    background: white;
-    padding: 10px;
-    border-bottom: 2px solid #85195c;
-}
-p.sous-titre, p.reponse, p.question, p.date{
-    padding: 10px;
-}
-
-/**** PAGE CONVERSATION ****/
-.conversation{
-    border: 1px solid #85195c;
-}
-.bouton{
-    background: #85195c;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px;
-
 }
 
 
