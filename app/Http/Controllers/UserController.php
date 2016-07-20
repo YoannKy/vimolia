@@ -269,7 +269,7 @@ class UserController extends Controller
     }
 
    /**
-     * Get active experts (at least logged in 1 week ago)
+     * Get doctors
      *
      * @param  none
      * @return \App\Model\User

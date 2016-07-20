@@ -57,6 +57,16 @@ class User extends EloquentUser
         })->get();
     }
 
+    public static function listSelectedDoctors($filter = null)
+    {
+        if ($filter) {
+            return User::whereIn('id', $filter)->get();
+        }
+        return User::whereHas('roles', function ($query) {
+            $query->where('roles.slug', 'like', '%praticien%');
+        })->get();
+    }
+
     public static function listExperts()
     {
         return User::whereHas('roles', function ($query) {

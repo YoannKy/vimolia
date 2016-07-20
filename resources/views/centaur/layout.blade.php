@@ -57,12 +57,14 @@
                                          <li><a href="{{ route('forms.list') }}">Formulaires</a></li>
                                      @elseif(Sentinel::inRole('praticien'))
                                         <li><a href="{{ route('users.expert.list') }}">Contacter  un expert</a></li>
+                                              <li><a href="{{ route('users.patients') }}">Demandes des patients</a></li>
                                      @elseif(Sentinel::inRole('expert') || Sentinel::inRole('administrateur'))
                                         @if(Sentinel::inRole('expert'))
                                          <li><a href="{{ route('users.doctor.list') }}">Contacter  un praticien</a></li>
                                         @endif
                                      <li><a href="{{ route('forms.index') }}">Demandes avec un praticien</a></li>
                                      @endif
+                                     <li><a href="{{route('users.doctor.list')}}">Voir les médecins</a></li>
                                 @endif
                             </ul>
                             <ul class="nav navbar-nav navbar-right">

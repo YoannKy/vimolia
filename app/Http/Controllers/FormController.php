@@ -93,8 +93,8 @@ class FormController extends Controller
         if (!$form) {
             return redirect()->route('home');
         }
-        if (Sentinel::inRole('users')) {
-            $doctors = User::listDoctors(unserialize($form->doctors));
+        if (Sentinel::inRole('user')) {
+            $doctors = User::listSelectedDoctors(unserialize($form->doctors));
         } else {
             $doctors =  User::listDoctors();
         }
@@ -103,7 +103,6 @@ class FormController extends Controller
 
     public function addDoctors(Request $request, $id)
     {
-        dd($request->input('doctors'));
         Form::addDoctors(serialize($request->input('doctors')), $id);
         return redirect()->back();
     }
