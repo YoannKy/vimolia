@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -37,9 +36,12 @@ class ConvController extends Controller
         foreach ($convs as $conv) {
             $convTmp = Conv::find($conv->getId());
             $participants = $this->getUniqueParticipants($participants, $conv->getAllParticipants());
-            $conv->participant = User::getParticipants($participants);
+            $finalParticipants = User::getParticipants($participants);
+            $conv->participant = $finalParticipants;
             $conv->title = $convTmp->title;
             $conv->satisfied = $convTmp->satisfied;
+            $conv->further = $convTmp->further;
+            $conv->messagesCount = count(TBMsg::getConversationMessages($convTmp->id, Sentinel::getUser()->id)->getAllMessages());
         }
         return view('convs.index', ['convs' => $convs]);
     }
@@ -64,6 +66,8 @@ class ConvController extends Controller
      */
     public function show($id)
     {
+        $participants = [];
+        $finalParticipants = [];
         $youtubeKey = Config::get('api.youtube');
 
         $conv = TBMsg::getConversationMessages($id, Sentinel::getUser()->id);
@@ -71,6 +75,12 @@ class ConvController extends Controller
         if (count($conv->getNumOfParticipants()) == 0) {
             return redirect(route('convs.index'));
         }
+
+
+        $participants = $this->getUniqueParticipants($participants, $conv->getAllParticipants());
+        $finalParticipants = User::getParticipants($participants);
+        $isDoctor = $finalParticipants->inRole('praticien');
+        $isExpert = $finalParticipants->inRole('expert');
         $history = [];
         $messages = $conv->getAllMessages();
         foreach ($messages as $message) {
@@ -86,7 +96,7 @@ class ConvController extends Controller
 
         $conv = Conv::find($id);
 
-        return view('convs.show', ['messages' => $history, 'conv'=>$conv, 'key'=>$youtubeKey]);
+        return view('convs.show', ['isExpert' => $isExpert, 'isDoctor' => $isDoctor, 'messages' => $history, 'conv'=>$conv, 'key'=>$youtubeKey]);
     }
 
     public function addMessage(Request $request, $id)
@@ -95,15 +105,17 @@ class ConvController extends Controller
         if (Sentinel::inRole('user')) {
             Conv::setConvAttribute($id, 'public', $request->has('public'));
         }
+        if (!is_null($request->get('title'))) {
+            Conv::setConvAttribute($id, 'title', $request->get('title'));
+        }
         if (Sentinel::inRole('expert')) {
             Conv::removeOtherExperts($id);
+            Conv::setConvAttribute($id, 'video', $request->get('video'));
         }
-        Conv::setConvAttribute($id, 'title', $request->get('title'));
-        Conv::setConvAttribute($id, 'video', $request->get('video'));
-
+       
         $emails = Conv::getReceiver($id);
         $conv = Conv::find($id);
-        foreach ($emails  as $email) {
+        /*foreach ($emails  as $email) {
             Mail::send(
                 'convs.email.new',
                 ['email' => $email, 'subject' => $conv->title, 'convId' => $conv->id],
@@ -112,7 +124,7 @@ class ConvController extends Controller
                             ->subject('Vous avez reçu un nouveau message');
                 }
             );
-        }
+        }*/
         return redirect(route('convs.show', ['id' => $id]));
     }
 
@@ -124,7 +136,7 @@ class ConvController extends Controller
      */
     public function create($id = null)
     {
-        if ($id != null && (Sentinel::inRole('expert') || Sentinel::inRole('practicien'))) {
+        if ($id != null && (Sentinel::inRole('expert') || Sentinel::inRole('praticien'))) {
             $conv = TBMsg::createConversation(
                 array(
                     Sentinel::getUser()->id,
