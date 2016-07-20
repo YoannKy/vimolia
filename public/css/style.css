@@ -304,6 +304,9 @@ p.sous-titre{
     padding: 15px;
     background: white;
 }
+.validationChoixMedecin{
+    margin: 0;
+}
 
 /*timeline*/
 .timeline {
