@@ -106,7 +106,7 @@
             @endif
             <select style="width:100%;" name="video" id="video"></select>     
             <script type="text/javascript">
-                $(function(){
+            $(function(){
                     (function() {
                         var prevMessage = $('#message').val(); 
                         $('#default').on('change',function(){
@@ -146,9 +146,11 @@
                                     page = data.nextPageToken || "";
                                     params.page = params.page || 1;
 
-                                        data.items.forEach(function (item) {
-                                            item.id = item.id.videoId;
-                                            item.text = item.snippet.title;
+                                    data.items.forEach(function (item) {
+                                        item.id = JSON.stringify({
+                                            id : item.id.videoId,
+                                            thumbnail: item.snippet.thumbnails.default.url,
+                                            title: item.snippet.title
                                         });
                                         item.text = item.snippet.title;
                                     });
@@ -186,7 +188,7 @@
                        }
 
                    })();
-                });   
+                });     
             </script>
             {{Form::submit('Je valide ma réponse')}}
         @else
