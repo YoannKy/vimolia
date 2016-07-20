@@ -29,7 +29,7 @@
 
 <div id="blocPresentation">
 <br>
-<div class="row skills">
+<div class="row fonctions">
   <div class="col-sm-6 col-md-2">
     <button type="button" class="btn btn-default btn-circle btn-xl"><i class="glyphicon glyphicon glyphicon-off"></i></button>
     <p>Inscription gratuite</p>

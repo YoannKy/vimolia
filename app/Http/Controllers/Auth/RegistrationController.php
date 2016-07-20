@@ -37,6 +37,10 @@ class RegistrationController extends Controller
         return view('Centaur::auth.register');
     }
 
+    public function getRegisterChoice()
+    {
+        return view('Centaur::auth.registerChoice');
+    }
     /**
      * Show the registration of doctor form
      * @return View
