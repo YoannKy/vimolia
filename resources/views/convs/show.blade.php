@@ -146,11 +146,9 @@
                                     page = data.nextPageToken || "";
                                     params.page = params.page || 1;
 
-                                    data.items.forEach(function (item) {
-                                        item.id = JSON.stringify({
-                                            id : item.id.videoId,
-                                            thumbnail: item.snippet.thumbnails.default.url,
-                                            title: item.snippet.title
+                                        data.items.forEach(function (item) {
+                                            item.id = item.id.videoId;
+                                            item.text = item.snippet.title;
                                         });
                                         item.text = item.snippet.title;
                                     });
