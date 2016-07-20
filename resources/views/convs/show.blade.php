@@ -24,21 +24,24 @@
 @foreach($messages as $message)
     @if(Sentinel::getUser()->id == $message->senderId)
         @if(Sentinel::inRole('expert') && !$isDoctor)  
-            <p class="reponse">Votre réponse est :</p>
+        <div class="reponse">
+            <p class="reponsePosee"><span>Votre réponse est :</span><br>
         @elseif(Sentinel::inRole('praticien') || Sentinel::inRole('expert') && $isDoctor)
-           <p class="reponse">vous :</p>
+            <p>vous :</p>
         @elseif(Sentinel::inRole('user'))
-           <p class="question">Votre question est :</p>
+        <div class="question">
+            <p class="questionPosee"><span>Votre question est :</span><br>
         @endif
         {{$message->content}}</p>
         <p class="date">Publiée le : 
         {{$message->created}}</p>
+        </div>
     @else
         @if(Sentinel::inRole('expert') && !$isDoctor)
         <br>
-        <div class="expertReponse">
-            <p class="reponse">Rappel de la question du patient :
-        </div>
+        <div class="question">
+            <p class="questionPosee"><span>Rappel de la question du patient :</span><br>
+        
         @elseif(Sentinel::inRole('expert') && $isDoctor)
              {{Sentinel::findById($expertId)->first_name}} :
         @elseif(Sentinel::inRole('user'))
@@ -47,12 +50,14 @@
                 $expertId = $message->senderId;
             }
             ?>
-            La réponse de l'expert est :
-        @elseif( Sentinel::inRole('praticien'))
-        {{Sentinel::findById($expertId)->first_name}} :
-        @endif
-        {{$message->content}}</p>
-        <p class="date">Publiée le : {{$message->created}}</p>
+            <div class="reponse">
+                <p class="reponsePosee"><span>La réponse de l'expert est :</span><br>
+                @elseif( Sentinel::inRole('praticien'))
+                    {{Sentinel::findById($expertId)->first_name}} :
+                @endif
+                    {{$message->content}}</p>
+                <p class="date">Publiée le : {{$message->created}}</p>
+        </div>
             @if($conv->video != null)
             <div class="row">
                 <div class="col-xs-12">Une vidéo à été postée pour cette question/réponse :</div>
@@ -63,9 +68,8 @@
                      <img src="{{$video['thumbnail']}}" style="max-width: 100%"/>
                 </div>
                 <div clas="col-sm-10">
-                        <div class="col-sm-6">
-                            <a  href="https://youtube.com/watch?v={{$video["id"]}}" target="_blank">{{$video["title"]}}</a>
-
+                    <div class="col-sm-6">
+                        <a  href="https://youtube.com/watch?v={{$video["id"]}}" target="_blank">{{$video["title"]}}</a>
                     </div>
                 </div>
             </div>
@@ -80,17 +84,19 @@
     {{ Form::open(array('route' => ['convs.addMessage',$conv->id])) }}
         @if(count($messages) == 0) 
             <div class="form-group">
-            <br><br>
-            @if(Sentinel::inRole('user'))
-            {{Form::label('title', 'Titre de ma question :')}}
-            @elseif(Sentinel::inRole('praticien') || Sentinel::inRole('expert'))
-            {{Form::label('title', 'Titre de ma Conversation :')}}
-            @endif
-            {{Form::text('title',null,array('class'=>'form-control','required'=>'required','id'=>'title'))}}
-            </div>
+                <div class="questionPatient">
+                @if(Sentinel::inRole('user'))
+                    {{Form::label('title', 'Titre de ma question :')}}
+                @elseif(Sentinel::inRole('praticien') || Sentinel::inRole('expert'))
+                    {{Form::label('title', 'Titre de ma conversation :')}}
+                @endif
+                {{Form::text('title',null,array('class'=>'form-control','required'=>'required','id'=>'title'))}}
         @endif
+        <br>
+        <div class="reponse">
+        <p class="questionPublique">
         {{Form::label('message', 'Ma réponse :')}}
-        {{Form::textarea('message',null,array('class'=>'form-control',   'required'=>'required','id'=>'message'))}}     
+        {{Form::textarea('message',null,array('class'=>'form-control', 'required'=>'required','id'=>'message'))}}  
         <br>      
         {{Form::hidden('id_conv', $conv->id)}}
         @if(Sentinel::inRole('expert'))
@@ -140,11 +146,9 @@
                                     page = data.nextPageToken || "";
                                     params.page = params.page || 1;
 
-                                    data.items.forEach(function (item) {
-                                        item.id = JSON.stringify({
-                                            id : item.id.videoId,
-                                            thumbnail: item.snippet.thumbnails.default.url,
-                                            title: item.snippet.title
+                                        data.items.forEach(function (item) {
+                                            item.id = item.id.videoId;
+                                            item.text = item.snippet.title;
                                         });
                                         item.text = item.snippet.title;
                                     });
@@ -192,6 +196,7 @@
             @endif
             {{Form::submit('Je valide ma question')}}
         @endif
+
     {{ Form::close() }}
 @else
     @if(Sentinel::inRole('expert') && !$isDoctor)

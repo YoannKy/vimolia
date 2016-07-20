@@ -146,6 +146,11 @@ section .WelcomeMsg{
 .question p.date span{
     font-weight: bold;
 }
+.questionPatient{
+    margin: 0;
+    padding: 15px;
+    background: white;
+}
 
 /**** REPONSE ****/
 .reponse{
@@ -158,6 +163,14 @@ section .WelcomeMsg{
     padding: 10px;
 }
 .reponse p.reponsePosee span{
+    font-weight: bold;
+}
+.reponse p.date{
+    margin: 0;
+    padding: 10px;
+    border-top: 1px solid silver;
+}
+.reponse p.date span{
     font-weight: bold;
 }
 .reponse p.questionPublique{

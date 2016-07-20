@@ -54,6 +54,16 @@ class RegistrationController extends Controller
     }
 
     /**
+     * Show the registration of doctor form
+     * @return View
+     */
+    public function getDoctorRegister
+    ()
+    {
+        return view('Centaur::auth.doctorRegister');
+    }
+
+    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
@@ -184,7 +194,7 @@ class RegistrationController extends Controller
             Storage::Delete(base_path() . '/public/images/catalog/', $imageName);
             return $result->dispatch();
         }
-        Skill::addSkills($request->get('skills'), $result->user->id);
+
         // Send the activation email
         $code = $result->activation->getCode();
         $email = $result->user->email;
