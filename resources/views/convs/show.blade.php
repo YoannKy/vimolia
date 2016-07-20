@@ -208,20 +208,26 @@
     @endif
 @endif
 
+<div class="row">
 @if(Sentinel::inRole('user') && 
     count($messages)==2 &&
     $conv->closed == 0  && 
     ($conv->satisfied == 0   && $conv->further ==0 ))
+    <div class="col-sm-6 col-md-3">
     {{ Form::open(array('route' => ['convs.close',$conv->id])) }}
         {{Form::hidden('satisfied',0 )}}
         {{Form::hidden('expertId', $expertId)}}
-        {{Form::submit('je souhaite plus de détails')}}
+        {{Form::submit('Je souhaite plus de détails')}}
     {{ Form::close() }}
+    </div>
 
+    <div class="col-sm-6 col-md-4">
     {{ Form::open(array('route' => ['convs.close',$conv->id])) }}
         {{Form::hidden('satisfied',1 )}}
         {{Form::hidden('expertId', $expertId)}}
-        {{Form::submit('cette réponse me convient')}}
+        {{Form::submit('Cette réponse me convient')}}
     {{ Form::close() }}
+    </div>
 @endif
+</div>
 @stop
