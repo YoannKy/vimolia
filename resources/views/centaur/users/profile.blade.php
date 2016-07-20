@@ -69,7 +69,7 @@ Note :{{$note}}
 
         </div>
 @if ($isFind && !$isNoted))
-<p>Notez le practicien :</p>
+<p>Notez le praticien :</p>
 {{ Form::open(array('route' => ['forms.doctors.note',$user->id])) }}
 {{Form::number('note', '')}}
 <input type="submit" name="validation" value="valider">

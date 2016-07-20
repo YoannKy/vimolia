@@ -7,7 +7,24 @@ use Carbon\Carbon;
 use Sentinel;
 use DB;
 class User extends EloquentUser
-{   
+{
+
+    protected $fillable = [
+        'email',
+        'password',
+        'last_name',
+        'first_name',
+        'permissions',
+        'address',
+        'date_of_birth',
+        'phone_number',
+        'avatar',
+        'profession',
+        'siret',
+        'degree',
+        'how_did_you_know'
+    ];
+
     public function convs()
     {
         return  $this->belongsToMany('App\Models\Conv', 'conv_users', 'user_id', 'conv_id');
@@ -36,7 +53,7 @@ class User extends EloquentUser
             return User::whereIn('doctors', $filter)->get();
         }
         return User::whereHas('roles', function ($query) {
-            $query->where('roles.slug', 'like', '%practicien%');
+            $query->where('roles.slug', 'like', '%praticien%');
         })->get();
     }
 

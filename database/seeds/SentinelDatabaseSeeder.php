@@ -22,7 +22,7 @@ class SentinelDatabaseSeeder extends Seeder
         ));
 
         $user = Sentinel::getUserRepository()->create(array(
-            'email'    => 'y.keoxay@gmail.com',
+            'email'    => 'bernard@user.com',
             'password' => 'password',
             'first_name' => 'bernard',
             'last_name' => 'chaussette'
@@ -43,14 +43,14 @@ class SentinelDatabaseSeeder extends Seeder
         ));
 
         $expert = Sentinel::getUserRepository()->create(array(
-            'email'    => 'yoann.keoxay@hetic.net',
+            'email'    => 'winston@expert.com',
             'password' => 'password',
             'first_name' => 'winston',
             'last_name' => 'antilope'
         ));
 
         $expert2 = Sentinel::getUserRepository()->create(array(
-            'email'    => 'trilogie_legend@hotmail.fr',
+            'email'    => 'houston@expert.com',
             'password' => 'password',
             'first_name' => 'houston',
             'last_name' => 'hoxton'
@@ -92,8 +92,8 @@ class SentinelDatabaseSeeder extends Seeder
             'permissions' => array()
         ));
         $docRole = Sentinel::getRoleRepository()->create(array(
-            'name' => 'Practicien',
-            'slug' => 'practicien',
+            'name' => 'Praticien',
+            'slug' => 'praticien',
             'permissions' => array(
                 'users.update' => true,
                 'users.view' => true,
