@@ -33,22 +33,36 @@
 		</div>
 	</div>
 @else
-	<h2>Liste des médecins proposés par l'expert</h2>
-	<p class="sous-titre">
-		Vous pouvez prendre contact avec un des médecins proposés puis sélectionner celui avec lequel vous avez pris le rendez-vous.
-	</p>
 
-	<div class="listeMedecin">
-	{{ Form::open(array('route' => ['forms.doctors.choose',$formId])) }}
+<h2>Liste des médecins proposés par l'expert</h2>
+<p class="sous-titre">
+	Vous pouvez prendre contact avec un des médecins proposés puis sélectionner celui avec lequel vous avez pris le rendez-vous.
+</p>
+
+{{ Form::open(array('route' => ['forms.doctors.choose',$formId])) }}
+<div class="panel panel-default">
+  <table class="table">
+  <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Choix</th>
+      </tr>
+    </thead>
+    <tbody>
+    
 	@foreach($doctors as $index => $doctor)
-		<p>
-			{{$doctor->first_name}}
-			{{$doctor->last_name}}
-			{{ Form::radio('doctor', $doctor->id )}}
-		</p>
+      <tr>
+        <td>{{$doctor->first_name}}</td>
+        <td>{{$doctor->last_name}}</td>
+        <td>{{ Form::radio('doctor', $doctor->id )}}</td>
+      </tr>
 	@endforeach
-		{{ Form::submit('valider')}}
-	{{ Form::close()}}
-	</div>
+		
+	</tbody>
+  </table>
+</div>
+{{ Form::submit('Valider')}}
+{{ Form::close()}}
 @endif
 @stop
