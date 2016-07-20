@@ -279,9 +279,6 @@ p.sous-titre{
 }
 
 /**** PAGE CONVERSATION ****/
-.conversation{
-    border: 1px solid #85195c;
-}
 .bouton{
     background: #85195c;
     color: white;

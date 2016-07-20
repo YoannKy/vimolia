@@ -3,41 +3,55 @@
 
 @section('content')
 <h2>Liste de vos conversations</h2>
-<div class="list-group">
-@foreach($convs as $index => $conv)
-   <div class="conversation list-group-item @if($conv->satisfied) list-group-item-success @elseif($conv->further) list-group-item-danger  @endif">
-    Sujet : {{ $conv->title }}
-    <br>
-    @if($conv->messagesCount == 1)
-    personne n'a encore répondu
-    @endif
-    <br>
-    @if (Sentinel::inRole('user') || 
-        Sentinel::inRole('expert') && 
-        Sentinel::findById($conv->participant->id)->inRole('user'))
+<div class="panel panel-default">
+  <table class="table">
+  <thead>
+      <tr>
+        <th>Sujet</th>
+        <th>Dernier message de :</th>
+        <th>Statut</th>
+        <th>Voir à la question / Répondre à la question</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach($convs as $index => $conv)
+      @if($conv->satisfied)
+      <tr class="success">
+        <td>{{ $conv->title }}</td>
+        <td>{{$conv->participant->first_name}} {{$conv->participant->last_name}}</td>
         @if($conv->satisfied)
-        Statut : Répondu
+        <td>Répondu</td>
         @elseif ($conv->further)
-        Statut: Répondu mais non satisfait
+        <td>Répondu mais non satisfait</td>
         @else
-        Statut : En attente
+        <td>En attente</td>
         @endif
-    @endif
-    <br><br>
-    <a class="lien" href="{{route('convs.show',$conv->getId())}}">
-        @if(Sentinel::inRole('expert') && $conv->messagesCount ==1)
-            <button type="button" class="bouton">Répondre à la question du patient</button>
-        @elseif(Sentinel::inRole('expert') && $conv->messagesCount ==2)
-            <button type="button" class="bouton">Voir la question</button>
-        @elseif(Sentinel::inRole('user'))
-            <button type="button" class="bouton">Voir la question que j'ai posé</button>
-        @elseif(Sentinel::inRole('praticien') || Sentinel::inRole('expert'))
-                <button type="button" class="bouton">Voir la conversattion</button>
-        
+        @if(Sentinel::inRole('expert'))
+        <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Répondre à la question du patient</button></a></td>
+        @else
+        <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Voir la question que j'ai posé</button></a></td>
         @endif
-    </a>
-    </div>
-    <br>
+      </tr>
+      @elseif($conv->further)
+      <tr class="danger">
+        <td>{{ $conv->title }}</td>
+        <td>{{$conv->participant->first_name}} {{$conv->participant->last_name}}</td>
+        @if($conv->satisfied)
+        <td>Répondu</td>
+        @elseif ($conv->further)
+        <td>Répondu mais non satisfait</td>
+        @else
+        <td>En attente</td>
+        @endif
+        @if(Sentinel::inRole('expert'))
+        <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Répondre à la question du patient</button></a></td>
+        @else
+        <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Voir la question que j'ai posé</button></a></td>
+        @endif
+      </tr>
+      @endif
 @endforeach
+    </tbody>
+  </table>
 </div>
 @stop
