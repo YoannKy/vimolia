@@ -70,7 +70,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 @if (Sentinel::check())
                                     <li><a href="{{route('users.profile',Sentinel::getUser()->id)}}">{{Sentinel::getUser()->first_name}} {{Sentinel::getUser()->last_name}}</a></li>
-                                    <li><a href="{{ route('auth.logout') }}">Déconnexion</a></li>
+                                    <li><a href="{{ route('auth.logout') }}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>
                                 @else
                                     <li><a href="{{ route('auth.login.form') }}">Connexion</a></li>
                                     <li><a href="{{ route('auth.register.choose') }}">Inscription</a></li>

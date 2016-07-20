@@ -23,6 +23,9 @@ nav .navbar-custom{
     background: #85195c;
     color: white;
 }
+nav .navbar ul{
+    margin: 0;
+}
 nav .navbar ul li{
     text-transform: uppercase;
 }
