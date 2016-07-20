@@ -16,7 +16,7 @@
     <tbody>
     @foreach($forms as $index => $form)
       <tr>
-        <td>?</td>
+        <td>{{$index+1}}</td>
         <td><button type="button" class="bouton">{!! link_to(route('forms.show',$form->id),'Voir le formulaire') !!}</button></td>
         <td><button type="button" class="bouton">{!! link_to(route('forms.doctors.list',$form->id),'Voir les médecins proposés') !!}</button></td>
       </tr>
