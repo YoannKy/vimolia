@@ -27,13 +27,11 @@
         @else
         <td>En attente</td>
         @endif
-        <a class="lien" href="{{route('convs.show',$conv->getId())}}">
-            @if(Sentinel::inRole('expert'))
-            <td><button type="button" class="bouton">Répondre à la question du patient</button></td>
-            @else
-            <td><button type="button" class="bouton">Voir la question que j'ai posé</button></td>
-            @endif
-        </a>
+        @if(Sentinel::inRole('expert'))
+        <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Répondre à la question du patient</button></a></td>
+        @else
+        <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Voir la question que j'ai posé</button></a></td>
+        @endif
       </tr>
       @elseif($conv->further)
       <tr class="danger">
@@ -46,13 +44,11 @@
         @else
         <td>En attente</td>
         @endif
-        <a class="lien" href="{{route('convs.show',$conv->getId())}}">
-            @if(Sentinel::inRole('expert'))
-            <td><button type="button" class="bouton">Répondre à la question du patient</button></td>
-            @else
-            <td><button type="button" class="bouton">Voir la question que j'ai posé</button></td>
-            @endif
-        </a>
+        @if(Sentinel::inRole('expert'))
+        <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Répondre à la question du patient</button></a></td>
+        @else
+        <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Voir la question que j'ai posé</button></a></td>
+        @endif
       </tr>
       @endif
 @endforeach
