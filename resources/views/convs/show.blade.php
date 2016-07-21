@@ -26,6 +26,7 @@
         @if(Sentinel::inRole('expert') && !$isDoctor)  
         <div class="reponse">
             <p class="reponsePosee"><span>Votre réponse est :</span><br>
+
         @elseif(Sentinel::inRole('praticien') || Sentinel::inRole('expert') && $isDoctor)
             <p>vous :</p>
         @elseif(Sentinel::inRole('user'))
@@ -37,6 +38,11 @@
         {{$message->created}}</p>
         </div>
     @else
+        <?php
+        if (is_null($expertId)) {
+            $expertId = $message->senderId;
+        }
+        ?>
         @if(Sentinel::inRole('expert') && !$isDoctor)
         <br>
         <div class="question">
@@ -45,11 +51,6 @@
         @elseif(Sentinel::inRole('expert') && $isDoctor)
              {{Sentinel::findById($expertId)->first_name}} :
         @elseif(Sentinel::inRole('user'))
-            <?php
-            if (is_null($expertId)) {
-                $expertId = $message->senderId;
-            }
-            ?>
             <div class="reponse">
                 <p class="reponsePosee"><span>La réponse de l'expert est :</span><br>
                 @elseif( Sentinel::inRole('praticien'))
@@ -57,7 +58,7 @@
                 @endif
                     {{$message->content}}</p>
                 <p class="date">Publiée le : {{$message->created}}</p>
-        </div>
+   
             @if($conv->video != null)
             <div class="row">
                 <div class="col-xs-12">Une vidéo à été postée pour cette question/réponse :</div>

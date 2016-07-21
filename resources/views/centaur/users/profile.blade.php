@@ -28,9 +28,10 @@
                 <div class="col-sm-6 col-md-8">
                     <div class="jumbotron thumbnail">
                         <h2>Mes informations personnelles</h2>
-                        <p><i>Je me situe au : {{$user->address}}</i></p>
-                        @foreach($user->skills() as $index => $skill)
-                            <p>Compétence {{$index}} : {{$skill}}</p>
+                        <p><i>Je me situe au : {{$user->address}} {{$user->zip_code}} {{$user->city}}</i></p>
+                        @foreach($user->getSkills($user->id) as $index => $skill)
+                            <?php $index++; ?>
+                            <p>Compétence {{$index}} : {{$skill->name}}</p>
                         @endforeach
                     </div>
                 </div>
