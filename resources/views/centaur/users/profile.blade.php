@@ -17,20 +17,21 @@
                             <h3>{{$user->first_name}} {{$user->last_name}}</h3>
                             <img src="/images/photo.png" alt="photo praticien">
                             <div class="caption">
-                                <p>Spécialité</p>
+                                <p>Métier : {{$user->profession}}</p>
                                 <p>
                                     Note :{{$note}}
                                 </p>
                             </div>
                         </center>
                     </div>
-                </div>
+                </div>  
                 <div class="col-sm-6 col-md-8">
                     <div class="jumbotron thumbnail">
                         <h2>Mes informations personnelles</h2>
-                        <p><i>Je me situe au : 5 rue du Cabinet</i></p>
-                        <p>Compétence 1 : </p>
-                        <p>Compétence 2 : </p>
+                        <p><i>Je me situe au : {{$user->address}}</i></p>
+                        @foreach($user->skills() as $index => $skill)
+                            <p>Compétence {{$index}} : {{$skill}}</p>
+                        @endforeach
                     </div>
                 </div>
             </div>
