@@ -23,13 +23,8 @@
         <th>Prénom</th>
         <th>Nom</th>
         <th>Adresse</th>
-        <th>Code Postal</th>
-        <th>Ville</th>
         <th>Métier</th>
         <th>Note</th>
-        @if(Sentinel::inRole('expert'))
-          <th></th>
-        @endif
       </tr>
     </thead>
     <tbody>

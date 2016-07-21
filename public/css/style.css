@@ -256,6 +256,10 @@ section .WelcomeMsg{
 #praticien h3{
     text-align: center;
 }
+.imageListeMedecin{
+    width: 50px;
+    height: 50px;
+}
 
 /**** PATIENT : PAGE POSER UNE QUESTION ****/
 input[type=submit]{
