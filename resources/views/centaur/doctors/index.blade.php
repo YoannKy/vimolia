@@ -23,6 +23,8 @@
         <th>Prénom</th>
         <th>Nom</th>
         <th>Adresse</th>
+        <th>Code postale</th>
+        <th>Ville</th>
         <th>Métier</th>
         <th>Note</th>
       </tr>
@@ -37,7 +39,7 @@
         <td>{{$doctor->zip_code}}</td>
         <td>{{$doctor->city}}</td>
         <td>{{$doctor->profession}}</td>
-        <td>note</td>
+        <td>{{$doctor::getNote($doctor->id)}}</td>
         <td>
           @if(Sentinel::inRole('expert'))
             {!! link_to(route('convs.create',$doctor->id),'Contacter') !!}
