@@ -14,8 +14,8 @@
                         <fieldset>
                             <div class="form-group {{ ($errors->has('avatar')) ? 'has-error' : '' }}">
                                 <label for="avatar">Avatar :</label>
-                                {!! Form::file('avatar', ['id'=>'avatar']) !!}
-                                {!! ($errors->has('avatar') ? $errors->first('avatar', '<p class="text-danger">:message</p>') : '') !!}
+                                {!! Form::file('avatar_user', ['id'=>'avatar']) !!}
+                                {!! ($errors->has('avatar_user') ? $errors->first('avatar_user', '<p class="text-danger">:message</p>') : '') !!}
                             </div>
                             <div class="form-group {{ ($errors->has('email')) ? 'has-error' : '' }}">
                                 {{ Form::text('email',old('email'),['placeholder'=>'E-mail','class'=>'form-control'])}}

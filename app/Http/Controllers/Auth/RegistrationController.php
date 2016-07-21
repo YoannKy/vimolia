@@ -147,9 +147,9 @@ class RegistrationController extends Controller
             'how_did_you_know' => 'max:255'
         ]);
 
-        $imageName = uniqid(). '.' .$request->file('avatar')->getClientOriginalExtension();
+        $imageName = uniqid(). '.' .$request->file('avatar_user')->getClientOriginalExtension();
 
-        $request->file('avatar')->move(
+        $request->file('avatar_user')->move(
             base_path() . '/public/images/avatar/', $imageName
         );
 
