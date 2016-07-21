@@ -31,6 +31,8 @@ class UserController extends Controller
         'first_name',
         'permissions',
         'address',
+        'zip_code',
+        'city',
         'date_of_birth',
         'phone_number',
     ];
@@ -86,6 +88,8 @@ class UserController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
+            'zip_code' =>'required',
+            'city',
             'date_of_birth' => 'required',
             'phone_number' => 'required',
             'email' => 'required|email|max:255|unique:users',

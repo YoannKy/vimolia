@@ -4,6 +4,7 @@
 @section('content')
 	{{ Form::open(array('method' => 'GET' ,'route' => ['users.doctor.list'])) }}
 			{{ Form::text('last_name', null,['placeholder'=>'Nom','class'=>'form-control'])}}
+			{{ Form::text('address', null,['placeholder'=>'localisation','class'=>'form-control'])}}
 			<div class="form-group">
 				<select multiple="multiple" class="selectpicker" name="skill" id="disciplines">
 					@foreach($skills as $skill)
