@@ -8,7 +8,6 @@
   <thead>
       <tr>
         <th>Sujet</th>
-        <th>Dernier message de :</th>
         <th>Statut</th>
         <th>Voir à la question / Répondre à la question</th>
       </tr>
@@ -21,7 +20,6 @@
       <tr class="danger">
       @endif
         <td>{{ $conv->title }}</td>
-        <td>{{$conv->participant->first_name}} {{$conv->participant->last_name}}</td>
         @if($conv->satisfied)
         <td>Répondu</td>
         @elseif ($conv->further)
