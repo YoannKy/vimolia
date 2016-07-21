@@ -277,7 +277,7 @@ class UserController extends Controller
      */
     public function doctors(Request $request)
     {
-        $doctors = User::listDoctors($request->get('last_name'));
+        $doctors = User::listDoctors($request->get('last_name'), $request->get('skill'));
         $skills = Skill::all();
         return view('Centaur::doctors.index')
                 ->with(array('doctors' => $doctors, 'skills'=> $skills));

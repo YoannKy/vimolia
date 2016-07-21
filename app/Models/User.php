@@ -52,18 +52,22 @@ class User extends EloquentUser
         return User::whereIn('id', $aId)->where('id', '!=', Sentinel::getUser()->id)->first();
     }
 
-    public static function listDoctors($filter = null)
+    public static function listDoctors($last_name = null, $skill = null)
     {
-        return User::find(12)->skills()->get();
-        if ($filter) {
-            return User::whereHas('roles', function ($query) {
-                $query->where('roles.slug', 'like', '%praticien%');
-            })->where('last_name', $filter)->get();
-
-        }
-        return User::whereHas('roles', function ($query) {
+        $user = User::whereHas('roles', function ($query) {
             $query->where('roles.slug', 'like', '%praticien%');
-        })->get();
+        });
+
+
+        if ($last_name) {
+            $user = $user->where('last_name', $last_name);
+        }
+        if ($skill) {
+            $user = $user->whereHas('skills', function ($query) use ($skill) {
+                $query->where('skills.name', $skill);
+            });
+        }
+        return $user->get();
     }
 
     public static function listExperts()

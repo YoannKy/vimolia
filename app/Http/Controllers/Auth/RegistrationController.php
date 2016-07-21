@@ -54,16 +54,6 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Show the registration of doctor form
-     * @return View
-     */
-    public function getDoctorRegister
-    ()
-    {
-        return view('Centaur::auth.doctorRegister');
-    }
-
-    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data

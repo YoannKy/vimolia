@@ -5,9 +5,9 @@
 	{{ Form::open(array('method' => 'GET' ,'route' => ['users.doctor.list'])) }}
 			{{ Form::text('last_name', null,['placeholder'=>'Nom','class'=>'form-control'])}}
 			<div class="form-group">
-				<select multiple="multiple" class="selectpicker" name="skills[]" id="disciplines">
+				<select multiple="multiple" class="selectpicker" name="skill" id="disciplines">
 					@foreach($skills as $skill)
-						<option value="{{$skill['id']}}">{{$skill['name']}}</option>
+						<option value="{{$skill['name']}}">{{$skill['name']}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -16,8 +16,28 @@
 <div class="listeMedecin">
 	<div class="row">
 		@foreach($doctors as $index => $doctor)
-			{{ var_dump($doctors) }}
-
+			<div class="col-sm-6 col-md-4">
+				<center>
+					<div class="thumbnail">
+						<div class="caption">
+							<h3>{{$doctor->first_name}} {{$doctor->last_name}}</h3>
+							<img src="/images/photo.png" alt="..."><br><br>
+						</div>
+						<li>
+							<ul>Adresse :{{ $doctor->address  }}</ul>
+							<ul>Note :{{ $doctor->getNote($doctor->id) }}</ul>
+							<ul>Spécialités :</br>
+							@foreach($doctor->skills($doctor->id) as $skill)
+								{{$skill->name}}<br>
+							@endforeach
+							</ul>
+						</li>
+					</div>
+				</center>
+			@if(Sentinel::inRole('expert'))
+				{!! link_to(route('convs.create',$doctor->id),'contacter') !!}
+			@endif
+			</div>
 		@endforeach
 	</div>
 </div>

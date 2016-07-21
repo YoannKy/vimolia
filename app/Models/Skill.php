@@ -11,6 +11,11 @@ class Skill extends Model
     protected $table = 'skills';
 
 
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User', 'skill_users', 'skill_id', 'user_id');
+    }
+
 
     public static function addSkills(array $ids, $userId)
     {
