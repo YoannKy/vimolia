@@ -9,6 +9,7 @@
   <thead>
       <tr>
         <th>#</th>
+        <th>Avatar</th>
         <th>Prénom</th>
         <th>Nom</th>
         <th>Adresse</th>
@@ -18,19 +19,19 @@
     </thead>
     <tbody>
     @foreach($doctors as $index => $doctor)
-      @if($conv->satisfied)
-      <tr>
-        <td>{{$index}}</td>
-        <td>{{$doctor->first_name}}</td>
-        <td>{{$doctor->last_name}}</td>
-        <td>{{$doctor->address}}</td>
-        <td>{{$doctor->profession}}</td>
-        <td>note</td>
-      </tr>
-      @if(Sentinel::inRole('expert'))
+      	<tr>
+	        <td>{{$index+1}}</td>
+	        <td><img class="imageListeMedecin" src="/images/photo.png" alt="avatar"></td>
+	        <td>{{$doctor->first_name}}</td>
+	        <td>{{$doctor->last_name}}</td>
+	        <td>{{$doctor->address}}</td>
+	        <td>{{$doctor->profession}}</td>
+	        <td>note</td>
+	     </tr>
+      	@if(Sentinel::inRole('expert'))
 			{!! link_to(route('convs.create',$doctor->id),'Contacter') !!}
 		@endif
-@endforeach
+	@endforeach
     </tbody>
   </table>
 </div>
