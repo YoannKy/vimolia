@@ -198,6 +198,7 @@ class RegistrationController extends Controller
         $email = $result->user->email;
 
         $user = Sentinel::findById($result->user->id);
+        $user->skills()->attach($request->get('skills'));
         $role = Sentinel::findRoleByName('Praticien');
         $role->users()->attach($user);
 
