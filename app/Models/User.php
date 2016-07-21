@@ -16,6 +16,8 @@ class User extends EloquentUser
         'first_name',
         'permissions',
         'address',
+        'zip_code',
+        'city',
         'date_of_birth',
         'phone_number',
         'avatar',
@@ -24,6 +26,11 @@ class User extends EloquentUser
         'degree',
         'how_did_you_know'
     ];
+
+    public function skills()
+    {
+        return $this->belongsToMany('App\Models\Skill', 'skill_users', 'user_id', 'skill_id');
+    }
 
     public function convs()
     {
@@ -47,14 +54,24 @@ class User extends EloquentUser
         return User::whereIn('id', $aId)->where('id', '!=', Sentinel::getUser()->id)->first();
     }
 
-    public static function listDoctors($filter = null)
+    public static function listDoctors($last_name = null, $skill = null, $city = null)
     {
-        if ($filter) {
-            return User::whereIn('doctors', $filter)->get();
-        }
-        return User::whereHas('roles', function ($query) {
+        $user = User::whereHas('roles', function ($query) {
             $query->where('roles.slug', 'like', '%praticien%');
-        })->get();
+        });
+
+        if ($last_name) {
+            $user = $user->where('last_name', $last_name);
+        }
+        if ($city) {
+            $user = $user->where('city', $city);
+        }
+        if ($skill) {
+            $user = $user->whereHas('skills', function ($query) use ($skill) {
+                $query->where('skills.name', $skill);
+            });
+        }
+        return $user->get();
     }
 
     public static function listSelectedDoctors($filter = null)
@@ -97,5 +114,17 @@ class User extends EloquentUser
         $note = $note[0]->note / $note[0]->number;
         $note = number_format($note, 1);
         return $note;
+    }
+
+    public function getSkills($id)
+    {
+        $skills = DB::table('users')
+            ->join('skill_users', 'users.id', '=', 'skill_users.user_id')
+            ->join('skills', 'skills.id', '=', 'skill_users.skill_id')
+            ->select('skills.name')
+            ->where('users.id', $id)
+            ->get();
+
+        return $skills;
     }
 }

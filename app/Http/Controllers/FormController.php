@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Skill;
 use Sentinel;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -98,7 +99,8 @@ class FormController extends Controller
         } else {
             $doctors =  User::listDoctors();
         }
-        return view('forms.doctors', ['doctors'=> $doctors,'formId'=>$id]);
+        $skills = Skill::all();
+        return view('forms.doctors', ['doctors'=> $doctors,'formId'=>$id, 'skills' => $skills]);
     }
 
     public function addDoctors(Request $request, $id)

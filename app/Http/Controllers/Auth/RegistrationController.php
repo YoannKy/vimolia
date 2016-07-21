@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Skill;
 use Mail;
 use Session;
 use Sentinel;
@@ -48,7 +49,8 @@ class RegistrationController extends Controller
     public function getDoctorRegister
     ()
     {
-        return view('Centaur::auth.doctorRegister');
+        $skills = Skill::all();
+        return view('Centaur::auth.doctorRegister', ['skills' => $skills]);
     }
 
     /**
@@ -63,6 +65,8 @@ class RegistrationController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
+            'zip_code' => 'required|regex:/[0-9]{5}/',
+            'city' => 'required',
             'date_of_birth' => 'required|date',
             'phone_number' => 'required|regex:/[0-9]{10}/',
             'email' => 'required|email|max:255|unique:users',
@@ -83,6 +87,8 @@ class RegistrationController extends Controller
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'address' => $request->get('address'),
+            'zip_code' => $request->get('zip_code'),
+            'city' => $request->get('city'),
             'date_of_birth' => $request->get('date_of_birth'),
             'phone_number' => $request->get('phone_number'),
             'email' => trim($request->get('email')),
@@ -136,6 +142,8 @@ class RegistrationController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
+            'zip_code' => 'required|regex:/[0-9]{5}/',
+            'city' => 'required',
             'date_of_birth' => 'required|date',
             'phone_number' => 'required|regex:/[0-9]{10}/',
             'email' => 'required|email|max:255|unique:users',
@@ -164,6 +172,8 @@ class RegistrationController extends Controller
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'address' => $request->get('address'),
+            'zip_code' => $request->get('zip_code'),
+            'city' => $request->get('city'),
             'date_of_birth' => $request->get('date_of_birth'),
             'phone_number' => $request->get('phone_number'),
             'email' => trim($request->get('email')),

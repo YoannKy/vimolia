@@ -112,5 +112,51 @@ class SentinelDatabaseSeeder extends Seeder
         $expertRole->users()->attach($expert2);
         $docRole->users()->attach($doc);
         $docRole->users()->attach($doc2);
+
+        $data = array(
+            array('name'=>'Alimentation'),
+            array('name'=>'Acupuncture'),
+            array('name'=>'Anthropologie'),
+            array('name'=>'Aromathérapie'),
+            array('name'=>'Auriculo-réflexologie'),
+            array('name'=>'Chiropraxie'),
+            array('name'=>'Diététique'),
+            array('name'=>'EFT'),
+            array('name'=>'EMDR'),
+            array('name'=>'Ethnomédecines'),
+            array('name'=>'Feng Shui'),
+            array('name'=>'Fleurs de Bach'),
+            array('name'=>'Gemmothérapie'),
+            array('name'=>'Herboristerie'),
+            array('name'=>'Homéopathie'),
+            array('name'=>'Hypnose'),
+            array('name'=>'Magnétisme'),
+            array('name'=>'Massage traditionnel Thaï'),
+            array('name'=>'Masseurs-kinésithérapeutes'),
+            array('name'=>'Médecine Ayurvédique'),
+            array('name'=>'Médecine Energétique'),
+            array('name'=>'Médecine traditionnelle chinoise'),
+            array('name'=>'Mycothérapie'),
+            array('name'=>'Naturopathie'),
+            array('name'=>'Nutrithérapie'),
+            array('name'=>'Olfactothérapie'),
+            array('name'=>'Oligothérapie'),
+            array('name'=>'Ostéopathie'),
+            array('name'=>'Phytothérapie'),
+            array('name'=>'Posturologie'),
+            array('name'=>'Qi Gong'),
+            array('name'=>'Réflexologie plantaire Thaïe'),
+            array('name'=>'Réflexologie plantaire'),
+            array('name'=>'relaxation'),
+            array('name'=>'Rhinoréflexologie'),
+            array('name'=>'Shiatsu'),
+            array('name'=>'Rhinoréflexologie'),
+            array('name'=>'Somato émotionnel'),
+            array('name'=>'Rhinoréflexologie'),
+            array('name'=>'Sophrologie'),
+        );
+
+        DB::table('skills')->insert($data);
+
     }
 }

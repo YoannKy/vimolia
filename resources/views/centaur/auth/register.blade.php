@@ -41,6 +41,14 @@
                         <input class="form-control" placeholder="Adresse" name="address" type="text" value="{{ old('address') }}"/>
                         {!! ($errors->has('address') ? $errors->first('address', '<p class="text-danger">:message</p>') : '') !!}
                     </div>
+                    <div class="form-group {{ ($errors->has('zip_code')) ? 'has-error' : '' }}">
+                        {{ Form::text('zip_code',old('zip_code'),['placeholder'=>'Code Postal','class'=>'form-control'])}}
+                        {!! ($errors->has('zip_code') ? $errors->first('address', '<p class="text-danger">:message</p>') : '') !!}
+                    </div>
+                    <div class="form-group {{ ($errors->has('city')) ? 'has-error' : '' }}">
+                        {{ Form::text('city',old('city'),['placeholder'=>'Ville','class'=>'form-control'])}}
+                        {!! ($errors->has('city') ? $errors->first('city', '<p class="text-danger">:message</p>') : '') !!}
+                    </div>
                     <div class="form-group {{ ($errors->has('date_of_birth')) ? 'has-error' : '' }}">
                         <input class="form-control" placeholder="Date de naissance" name="date_of_birth" type="date" value="{{ old('date_of_birth') }}"/>
                         {!! ($errors->has('date_of_birth') ? $errors->first('date_of_birth', '<p class="text-danger">:message</p>') : '') !!}

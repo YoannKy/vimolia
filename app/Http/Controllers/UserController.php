@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\ConvController;
 use App\Models\Form;
 use App\Models\Conv;
+use App\Models\Skill;
 use Carbon\Carbon;
 use Mail;
 use Sentinel;
@@ -30,6 +31,8 @@ class UserController extends Controller
         'first_name',
         'permissions',
         'address',
+        'zip_code',
+        'city',
         'date_of_birth',
         'phone_number',
     ];
@@ -85,6 +88,8 @@ class UserController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
+            'zip_code' =>'required',
+            'city' => 'required',
             'date_of_birth' => 'required',
             'phone_number' => 'required',
             'email' => 'required|email|max:255|unique:users',
@@ -282,12 +287,12 @@ class UserController extends Controller
      * @param  none
      * @return \App\Model\User
      */
-    public function doctors()
+    public function doctors(Request $request)
     {
-        $doctors = User::listDoctors();
-
+        $doctors = User::listDoctors($request->get('last_name'), $request->get('skill'), $request->get('city'));
+        $skills = Skill::all();
         return view('Centaur::doctors.index')
-                ->with('doctors', $doctors);
+                ->with(array('doctors' => $doctors, 'skills'=> $skills));
     }
 
     public function experts()

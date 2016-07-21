@@ -41,6 +41,14 @@
                                 {{ Form::text('address',old('address'),['placeholder'=>'Adresse','class'=>'form-control'])}}
                                 {!! ($errors->has('address') ? $errors->first('address', '<p class="text-danger">:message</p>') : '') !!}
                             </div>
+                            <div class="form-group {{ ($errors->has('zip_code')) ? 'has-error' : '' }}">
+                                {{ Form::text('zip_code',old('zip_code'),['placeholder'=>'Code Postal','class'=>'form-control'])}}
+                                {!! ($errors->has('zip_code') ? $errors->first('address', '<p class="text-danger">:message</p>') : '') !!}
+                            </div>
+                            <div class="form-group {{ ($errors->has('city')) ? 'has-error' : '' }}">
+                                {{ Form::text('city',old('city'),['placeholder'=>'Ville','class'=>'form-control'])}}
+                                {!! ($errors->has('city') ? $errors->first('city', '<p class="text-danger">:message</p>') : '') !!}
+                            </div>
                             <div class="form-group {{ ($errors->has('date_of_birth')) ? 'has-error' : '' }}">
                                 {{ Form::date('date_of_birth',old('date_of_birth'),['placeholder'=>'Date de naissance','class'=>'form-control'])}}
                                 {!! ($errors->has('date_of_birth') ? $errors->first('date_of_birth', '<p class="text-danger">:message</p>') : '') !!}
@@ -65,6 +73,14 @@
                             <div class="form-group {{ ($errors->has('how_did_you_know')) ? 'has-error' : '' }}">
                                 {{ Form::textarea('how_did_you_know', old('how_did_you_know'), ['placeholder'=>'Comment avez-vous connu le site ?', 'class' => 'form-control']) }}
                                 {!! ($errors->has('how_did_you_know') ? $errors->first('how_did_you_know', '<p class="text-danger">:message</p>') : '') !!}
+                            </div>
+                            {{Form::label('disciplines', 'Disciplines :')}}
+                            <div class="form-group">
+                                <select multiple="multiple" class="selectpicker" name="skills[]" id="disciplines">
+                                    @foreach($skills as $skill)
+                                            <option value="{{$skill['id']}}">{{$skill['name']}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <input name="_token" value="{{ csrf_token() }}" type="hidden">
                             <input class="btn btn-lg btn-primary btn-block" type="submit" value="S'inscrire">
