@@ -25,6 +25,7 @@ nav .navbar-custom{
 }
 nav .navbar ul{
     margin: 0;
+    font-size: 13px;
 }
 nav .navbar ul li{
     text-transform: uppercase;
