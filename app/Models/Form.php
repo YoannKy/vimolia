@@ -30,6 +30,7 @@ class Form extends Model
         $form->conv_id = Session::get('conv');
         $form->first_name =$request->input('first_name');
         $form->last_name = $request->input('last_name');
+        $form->age = $request->input('age');
         $form->town = $request->input('town');
         $form->symptom= $request->input('symptom');
         $form->info = $request->input('info');

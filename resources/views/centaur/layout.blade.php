@@ -50,7 +50,7 @@
                                         <li class="{{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Utilisateurs</a></li>
                                         <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
                                     @endif
-                                     <li><a href="{{ route('convs.index') }}">Messages ({{$unread}})</a></li>
+                                     <li><a href="{{ route('convs.index') }}">Messages  <span class="badge"> {{$unread}} </span></a></li>
                                      <li><a href="{{ route('convs.public') }}">Questions publiques</a></li>
                                      @if(Sentinel::inRole('user'))
                                          <li><a href="{{ route('convs.create') }}">Poser une question</a></li>
@@ -64,7 +64,7 @@
                                         @endif
                                      <li><a href="{{ route('forms.index') }}">Demandes avec un praticien</a></li>
                                      @endif
-                                     <li><a href="{{route('users.doctor.list')}}">Voir les médecins</a></li>
+                                     <li><a href="{{route('users.doctor.list')}}">Praticiens</a></li>
                                 @endif
                             </ul>
                             <ul class="nav navbar-nav navbar-right">

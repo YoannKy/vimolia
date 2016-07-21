@@ -17,23 +17,9 @@
     @foreach($convs as $index => $conv)
       @if($conv->satisfied)
       <tr class="success">
-        <td>{{ $conv->title }}</td>
-        <td>{{$conv->participant->first_name}} {{$conv->participant->last_name}}</td>
-        @if($conv->satisfied)
-        <td>Répondu</td>
-        @elseif ($conv->further)
-        <td>Répondu mais non satisfait</td>
-        @else
-        <td>En attente</td>
-        @endif
-        @if(Sentinel::inRole('expert'))
-        <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Répondre à la question du patient</button></a></td>
-        @else
-        <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Voir la question que j'ai posé</button></a></td>
-        @endif
-      </tr>
-      @elseif($conv->further)
+        @elseif($conv->further)
       <tr class="danger">
+      @endif
         <td>{{ $conv->title }}</td>
         <td>{{$conv->participant->first_name}} {{$conv->participant->last_name}}</td>
         @if($conv->satisfied)
@@ -49,7 +35,6 @@
         <td><a class="lien" href="{{route('convs.show',$conv->getId())}}"><button type="button" class="bouton">Voir la question que j'ai posé</button></a></td>
         @endif
       </tr>
-      @endif
 @endforeach
     </tbody>
   </table>
